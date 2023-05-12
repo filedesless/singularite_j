@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Caractérisation des singularités de type $\mathfrak{J}$}
+\author{Félix Larose-Gervais}
+\date{Mai 2023}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\newpage
+
+\section{Propositions}
+
+Soit $n \in \mathbb{N}, \sigma \in S_n$, notons
+\begin{align*}
+    \pi : \mathbb{N}^{n+1} & \to \mathbb{N}^{n+1}                               \\
+    (a_0, a_1, \dots, a_n) & \mapsto (a_0, a_{\sigma(1)}, \dots, a_{\sigma(n)})
+\end{align*}
+
+\begin{proposition}
+    Soit $a=(a_0, a_1, \dots, a_n) \in \mathbb{N}^{n+1}$, alors
+    $$\mathfrak{J}(a) \iff \mathfrak{J}(\pi(a))$$
+\end{proposition}
+
+\begin{proof}
+    Notons $b = \pi(a)$
+
+    On a $E_a = \{ a^i \mid i = 1..n,\; a_i > 1 \},\; a^i = (a_i, a_1^i, \dots, a_n^i)$
+
+    Avec $\forall j = 1..n,\; a_j^i = \begin{cases}
+            -a_0 \mod a_i & \text{si } i = j \\
+            a_j \mod a_i  & \text{sinon}
+        \end{cases}$
+
+    Considérons $E_b = \{b^i \mid i = 1..n,\; b_i > 1\},\; b^i = (b_i, b_1^i, \dots, b_n^i)$
+
+    Avec $\forall j = 1..n$ \begin{align*}
+        b_j^i & = \begin{cases}
+                      -b_0 \mod b_i & \text{si } i = j \\
+                      b_j \mod b_i  & \text{sinon}
+                  \end{cases}
+        = \begin{cases}
+              -a_0 \mod a_{\sigma(i)}          & \text{si } \sigma(i) = \sigma(j) \\
+              a_{\sigma(j)} \mod a_{\sigma(i)} & \text{sinon}
+          \end{cases}
+    \end{align*}
+
+    Donc $b_j^i= a_{\sigma(j)}^{\sigma(i)}$
+
+    Donc $b^i = (a_{\sigma(i)}, a_{\sigma(1)}^{\sigma(i)}, \dots, a_{\sigma(n)}^{\sigma(i)}) = \pi(a^{\sigma(i)})$
+
+    Ainsi $E_b = \{ \pi(a^{\sigma(i)}) \mid i = 1..n,\; a_{\sigma(i)} > 1 \}$
+
+    C'est-à-dire $E_b = \{ \pi(a^i) \mid i = 1..n,\; a_i > 1\}$
+
+    Donc $\pi$ est une bijection entre $E_a$ et $E_b$
+
+    Et elle préserve le caractère lisse
+
+    S'il existe une suite d'éclatements montrant $\mathfrak{J}(a)$
+
+    L'application de $\pi$ à ces éléments est une suite montrant $\mathfrak{J}(b)$
+
+    La réciproque est vraie car $a = \pi^{-1}(\pi(a))$
+\end{proof}
+
+\newpage
+
+\begin{proposition}
+    Soit $a=(a_0, a_1, a_2)$, alors
+    $$\mathfrak{J}(a) \implies a_0 \geq a_1 + a_2$$
+\end{proposition}
+
+\begin{proof}
+    Supposons $a_0 < a_1 + a_2$
+
+    Si $a_1 = a_2$, alors $\neg \mathfrak{J}(a)$
+
+    Sinon, $a_1 \neq a_2$, supposons sans perdre de généralité que $a_1 > a_2$
+
+    Considérons l'éclatement $a^1 = (a_1,\; -a_0 \mod a_1,\; a_2 \mod a_1) \in E_a$
+    \begin{align*}
+        a_1 > a_2 & \implies 2a_1 > a_1+a_2               \\
+                  & \implies (-a_0 \mod a_1) = 2a_1 - a_0 \\
+        a_1 > a_2 & \implies (a_2 \mod a_1) = a_2
+    \end{align*}
+
+    On a donc $a^1 = (a_1, 2a_1-a_0, a_2)$
+
+    Puisque $a_0 < a_1 + a_2$, on a $a_1 < 2a_1 - a_0 + a_2$
+
+    Donc $a^1$ vérifie la condition initiale, on répète le raisonnement avec $a^1$
+\end{proof}
+
+\section{Conjectures}
+
+\begin{conjecture}
+    Soit $a=(a_0, a_1, a_2)$ un éclatement d'une singularité $[a]$
+
+    Posons $s = a_1 + a_2 + \gcd(a_0-a_1, a_0-a_2)$
+
+    Supposons $a_0 < s$
+
+    Alors $[a]$ est de type $\mathfrak{J}$ $\implies s = a_0 + 1$
+\end{conjecture}
+
+On constate que la réciproque n'est pas vraie, par exemple prenons $(13, 7, 4)$, on a $s = 14$, vérifiant donc $a_0 < 14$ et $a_0 + 1 = 14$, or elle n'est pas de type $\mathfrak{J}$.
+
+\begin{conjecture}
+    Soit $a=(a_0, a_1, a_2)$ un éclatement d'une singularité $[a]$
+
+    Alors $[a]$ est de type $\mathfrak{J}$ $\implies \exists p, q: a_0 = p*a_1 + q*a_2$
+\end{conjecture}
+
+
+\end{document}
