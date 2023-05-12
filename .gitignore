@@ -1,2 +1,3 @@
 __pycache__/
 *.synctex.gz
+.ipynb_checkpoints/
