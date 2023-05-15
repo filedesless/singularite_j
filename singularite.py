@@ -1,4 +1,4 @@
-from math import gcd
+from math import gcd, prod
 from typing import List
 from functools import cache
 
@@ -103,11 +103,15 @@ def isJStrict_(bs):
 
 def isJStrict(bs):
     a, b, c = bs[:3]
-    if a < b + c: # conjecture 2
-        return False
+    if len(bs) == 3:
+        if a == b + c:  # prop 1
+            return True
+        if a < b + c:  # prop 4
+            return False
     h, *t = bs
-    ans = isJStrict_((h, *sorted(t)))
-    if ans:
+    # by prop 2 and 3
+    ans = isJStrict_((h % prod(t), *sorted(t)))
+    if len(bs) == 3 and ans:
         # conjecture 1
         if a < (s := b + c + gcd(a - b, a - c)):
             assert s == a + 1
@@ -115,6 +119,7 @@ def isJStrict(bs):
         assert len([(p, q) for p in range(a)
                    for q in range(a) if p*b + q*c == a]) != 0
     return ans
+
 
 assert isJStrict((2, 1, 1, 1))
 assert isJStrict((3, 1, 2, 1))
@@ -124,4 +129,3 @@ assert isJStrict((5, 3, 2, 1))
 @cache
 def group(n: int):
     return [i for i in range(1, n) if coprime(n, i)]
-

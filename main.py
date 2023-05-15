@@ -1,8 +1,6 @@
 from math import gcd, prod
 from tabulate import tabulate
-from singularite import isJStrict, group
-
-
+from singularite import isJStrict, group, isJStrict_
 
 
 # print(isJ((7, 5, 3, 2)))
@@ -50,9 +48,10 @@ def phi(n: int):
 
 
 def main():
-    for i in range(330, 10_000):
-        print(i, phi(i))
-        print(is_nice(i))
+    for i in range(2, 100):
+        if is_nice(i):
+            print(i, phi(i))
+    print(isJStrict_.cache_info())
 
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -9,77 +10,150 @@
 \date{Mai 2023}
 
 
+\newtheorem{definition}{Définition}
 \newtheorem{proposition}{Proposition}
 \newtheorem{conjecture}{Conjecture}
+\newtheorem{exemple}{Exemple}
 
 \begin{document}
 
 \maketitle
 
+\newpage
+
+\tableofcontents
+
+\newpage
+
 \section{Introduction}
+
+\subsection{Définitions}
+
+Soit $r, n \in \mathbb{N}$, notons $\mathbb{Z}_r$ l'anneau $\mathbb{Z}/r\mathbb{Z}$ et $\mathbb{Z}_r^\times$ son groupe d'inversibles
+
+\begin{definition}
+    Une \textbf{singularité} est un $[a] = ([a_1], \dots, [a_n]) \in (\mathbb{Z}_r^\times)^n$, on appelle \begin{itemize}
+        \item $r$ la \textbf{racine} de la singularité
+        \item $[a_1], \dots, [a_n]$ les \textbf{poids} de la singularité
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    Un \textbf{éclatement} $a \in \mathbb{Z}^n$ d'une singularité $[a]$ (noté $a \in [a]$) est un choix de 
+    représentant $a = (a_1, \dots, a_n)$ tel que
+    \begin{align*}
+         \gcd(a_i, a_j) = 1 \tag{$\forall i \neq j$}
+    \end{align*}
+    On note $E_a$ l'ensemble des singularités associées à l'éclatement $a$ comme suit:
+    \begin{align*}
+        E_a = \{ ([a_1^i], \dots, [a_n^i]) \mid \forall i = 1..n,\; a_i > 1, [a_1^i], \dots, [a_n^i] \in \mathbb{Z}_{a_i}^\times \} \\
+        \forall j = 1..n : [a^i_j] \equiv \begin{cases}
+            -r & \text{si $i = j$} \\
+            a_j & \text{sinon}
+        \end{cases} \pmod{a_i}
+    \end{align*}
+\end{definition}
+
+\begin{definition}
+    Un éclatement $a \in [a]$ est dit \textbf{lisse} si $E_a = \emptyset$
+\end{definition}
+
+\begin{definition}
+    La singularité $[a]$ est dite de \textbf{type $\mathfrak{J}$} (noté $[a] \in \mathfrak{J}$) ssi
+    \begin{align*}
+        \exists a \in [a] : \forall [a^i] \in E_a : [a^i] \in \mathfrak{J}
+    \end{align*}
+\end{definition}
+    
+\subsection{Résultats connus}
+Résultats utiles, dûs à Habib Jaber.
+
+\begin{proposition}
+    Soit $a_1, a_2 \in \mathbb{Z},\; \gcd(a_1, a_2) = 1$, alors
+    \[ [(a_1 + a_2, a_1, a_2)] \in \mathfrak{J} \]
+\end{proposition}
+
+\begin{exemple}
+    $\gcd(2, 1) = 1 \implies [(3, 2, 1)] \in \mathfrak{J}$
+\end{exemple}
+
+\begin{proposition}
+    \[ 
+    [(a_0, a_1, a_2)] \in \mathfrak{J} \iff 
+    \forall k \in \mathbb{Z}: [(a_0 + k(a_1a_2), a_1, a_2)] \in \mathfrak{J} 
+    \]
+\end{proposition}
+
+\begin{exemple}
+    $[(3, 2, 1)] \in \mathfrak{J} \implies [(5, 2, 1)] \in \mathfrak{J},\; [(7, 2, 1)] \in \mathfrak{J}, \dots$
+\end{exemple}
 
 \newpage
 
 \section{Propositions}
 
-Soit $n \in \mathbb{N}, \sigma \in S_n$, notons
+Soit $\sigma \in S_n$, notons la permutation $\pi$
 \begin{align*}
-    \pi : \mathbb{N}^{n+1} & \to \mathbb{N}^{n+1}                               \\
-    (a_0, a_1, \dots, a_n) & \mapsto (a_0, a_{\sigma(1)}, \dots, a_{\sigma(n)})
+    \pi : \mathbb{Z}^n_r & \to \mathbb{Z}^n_r \\
+    ([a_1], \dots, [a_n]) & \mapsto ([a_{\sigma(1)}], \dots, [a_{\sigma(n)}])
 \end{align*}
 
 \begin{proposition}
-    Soit $a=(a_0, a_1, \dots, a_n) \in \mathbb{N}^{n+1}$, alors
-    $$\mathfrak{J}(a) \iff \mathfrak{J}(\pi(a))$$
+    L'ordre des poids d'une singularité n'affecte pas le type $\mathfrak{J}$
+
+    Soit $[a]=([a_1], \dots, [a_n]) \in (\mathbb{Z}_r^\times)^n$, alors
+    \[ [a] \in \mathfrak{J} \implies \pi([a]) \in \mathfrak{J} \]
 \end{proposition}
 
 \begin{proof}
-    Notons $b = \pi(a)$
+    Notons $[b] = \pi([a])$
 
-    On a $E_a = \{ a^i \mid i = 1..n,\; a_i > 1 \},\; a^i = (a_i, a_1^i, \dots, a_n^i)$
-
-    Avec $\forall j = 1..n,\; a_j^i = \begin{cases}
-            -a_0 \mod a_i & \text{si } i = j \\
-            a_j \mod a_i  & \text{sinon}
-        \end{cases}$
-
-    Considérons $E_b = \{b^i \mid i = 1..n,\; b_i > 1\},\; b^i = (b_i, b_1^i, \dots, b_n^i)$
-
-    Avec $\forall j = 1..n$ \begin{align*}
-        b_j^i & = \begin{cases}
-                      -b_0 \mod b_i & \text{si } i = j \\
-                      b_j \mod b_i  & \text{sinon}
-                  \end{cases}
-        = \begin{cases}
-              -a_0 \mod a_{\sigma(i)}          & \text{si } \sigma(i) = \sigma(j) \\
-              a_{\sigma(j)} \mod a_{\sigma(i)} & \text{sinon}
-          \end{cases}
+    On a, pour $a$ l'éclatement trivial de $[a]$ 
+    \begin{align*}
+        E_a & = \{ ([a^i_1], \dots, [a^i_n]) \mid \forall i = 1..n,\; a_i > 1,\; [a_1^i], \dots, [a_n^i] \in \mathbb{Z}_{a_i}^\times \} \\
+        [a_j^i] &\equiv \begin{cases}
+                -r &\text{si } i = j \\
+                a_j &\text{sinon}
+            \end{cases} \pmod{a_i} \quad \forall j = 1..n
     \end{align*}
 
-    Donc $b_j^i= a_{\sigma(j)}^{\sigma(i)}$
+    Considérons, pour $b$ l'éclatement trivial de $[b]$
+    \begin{align*}
+        E_b & = \{ ([b^i_1], \dots, [b^i_n]) \mid \forall i = 1..n,\; b_i > 1,\; [b_1^i], \dots, [b_n^i] \in \mathbb{Z}_{b_i}^\times\} \\
+        [b_j^i] & \equiv \begin{cases}
+                        -r &\text{si } i = j \\
+                        b_j &\text{sinon}
+                    \end{cases} \pmod{b_i} \\
+            & \equiv \begin{cases}
+                -r &\text{si } \sigma(i) = \sigma(j) \\
+                a_{\sigma(j)} &\text{sinon}
+            \end{cases} \pmod {a_{\sigma(i)}} \quad \forall j = 1..n
+    \end{align*}
 
-    Donc $b^i = (a_{\sigma(i)}, a_{\sigma(1)}^{\sigma(i)}, \dots, a_{\sigma(n)}^{\sigma(i)}) = \pi(a^{\sigma(i)})$
+    Donc $[b_j^i] = [a_{\sigma(j)}^{\sigma(i)}]$
 
-    Ainsi $E_b = \{ \pi(a^{\sigma(i)}) \mid i = 1..n,\; a_{\sigma(i)} > 1 \}$
+    Donc $[b^i] = ([a_{\sigma(1)}^{\sigma(i)}], \dots, [a_{\sigma(n)}^{\sigma(i)}]) = \pi([a^{\sigma(i)}])$
 
-    C'est-à-dire $E_b = \{ \pi(a^i) \mid i = 1..n,\; a_i > 1\}$
+    Ainsi $E_b = \{ \pi([a^{\sigma(i)}]) \mid \forall i = 1..n,\; a_{\sigma(i)} > 1 \} = \{ \pi(a^i) \mid \forall i = 1..n,\; a_i > 1\}$
 
     Donc $\pi$ est une bijection entre $E_a$ et $E_b$
 
     Et elle préserve le caractère lisse
 
-    S'il existe une suite d'éclatements montrant $\mathfrak{J}(a)$
+    S'il existe une suite d'éclatements montrant $[a] \in \mathfrak{J}$
 
-    L'application de $\pi$ à ces éléments est une suite montrant $\mathfrak{J}(b)$
-
-    La réciproque est vraie car $a = \pi^{-1}(\pi(a))$
+    L'application de $\pi$ à ces éléments est une suite montrant $[b] \in \mathfrak{J}$
 \end{proof}
+
+\begin{exemple}
+    Sachant $(5, 3, 1) \in \mathfrak{J}$, on en déduit $(5, 1, 3) \in \mathfrak{J}$
+\end{exemple}
 
 \newpage
 
 \begin{proposition}
     Soit $a=(a_0, a_1, a_2)$, alors
-    $$\mathfrak{J}(a) \implies a_0 \geq a_1 + a_2$$
+    \[ a \in \mathfrak{J} \implies a_0 \geq a_1 + a_2 \]
 \end{proposition}
 
 \begin{proof}
@@ -102,6 +176,10 @@ Soit $n \in \mathbb{N}, \sigma \in S_n$, notons
 
     Donc $a^1$ vérifie la condition initiale, on répète le raisonnement avec $a^1$
 \end{proof}
+
+\begin{exemple}
+    $(5, 4, 3) \not \in \mathfrak{J}$ car $5 < 7$
+\end{exemple}
 
 \section{Conjectures}
 
