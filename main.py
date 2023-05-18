@@ -1,3 +1,4 @@
+from sage.all import *
 from math import gcd, prod
 from tabulate import tabulate
 from singularite import isJStrict, group, isJStrict_
