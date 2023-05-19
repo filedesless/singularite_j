@@ -1,7 +1,7 @@
-from sage.all import *
 from math import gcd, prod
 from tabulate import tabulate
 from singularite import isJStrict, group, isJStrict_
+from itertools import product
 
 
 # print(isJ((7, 5, 3, 2)))
@@ -34,6 +34,13 @@ def is_nice(n: int):
     return count2(n) == 0
 
 
+def is_nice3d(n: int):
+    g = group(n)
+    pts = [p for p in product(g, repeat=3) if isJStrict((n, *p))]
+    phi = len(g)
+    return len(pts) == 6*phi-8
+
+
 def show(n: int):
     header = group(n)
     rows = [[(str(s) if n < (s := a + b + gcd(n - a, n - b)) else 'X') if isJStrict((n, a, b)) else ' '
@@ -49,9 +56,16 @@ def phi(n: int):
 
 
 def main():
-    for i in range(2, 100):
-        if is_nice(i):
-            print(i, phi(i))
+    for n in range(2, 100):
+        g = group(n)
+        pts = [xs for xs in product(g, repeat=4) if isJStrict(n, xs)]
+        print(n, len(pts))
+        for xs in pts:
+            if isJStrict(n, xs):
+                assert len([x for x in xs if x == 1]) >= 2
+
+        # print(i, phi(i), is_nice(i), is_nice3d(i))
+        # assert is_nice(i) == is_nice3d(i)
     print(isJStrict_.cache_info())
 
 

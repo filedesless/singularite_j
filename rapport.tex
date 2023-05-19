@@ -83,6 +83,44 @@ On notera aussi $S_n^m$ les m-uplets d'inversibles modulo n $({\mathbb{Z}_n^\tim
 
 \newpage
 
+\subsection{Rappels d'arithmétique}
+
+\subsubsection{Algorithme d'Euclide et PGCD}
+
+Soit $a, b \in \mathbb{Z}$, on calcule le PGCD comme suit
+\begin{align*}
+    \gcd(a, b) & := \begin{cases}
+        a & \text{ si $b = 0$} \\
+        \gcd(b, a \mod b) & \text{ sinon}
+    \end{cases}
+\end{align*}
+
+Avec $k \in \mathbb{Z}$, on a les propriétés suivantes:
+\begin{align}
+\gcd(a, 1) & = 1 \\
+\gcd(a, b) & = \gcd(b, a) \\
+\gcd(a, b) & = \gcd(a + kb, b)
+\end{align}
+
+De la dernière on déduit directement, pour $n \in \mathbb{N}$
+\begin{align*}
+    a &\equiv b \pmod n \\ \implies \gcd(a, n) &= \gcd(b, n)
+\end{align*}
+
+\subsubsection{Théorème des restes chinois}
+
+Soit $m, n_1, \dots, n_m \in \mathbb{N}$ et $a_1, \dots, a_m \in \mathbb{Z}$, notons le produit $n = n_1 \cdots n_m$
+
+Si $\forall i \neq j : \gcd(n_i, n_j) = 1$
+
+Alors $\exists!x \in \mathbb{Z}_n$ tel que
+\begin{align*}
+    x &\equiv a_1 \pmod {n_1} \\
+    &\vdotswithin{\equiv} \\
+    x &\equiv a_m \pmod {n_m}
+\end{align*}
+
+
 \subsection{Résultats connus}
 Résultats utiles, dûs à Habib Jaber.
 
@@ -167,7 +205,7 @@ Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S
 \newpage
 
 \begin{proposition}
-    Soit $a=(a_0, a_1, a_2)$, alors
+    (strict, rework) Soit $a=(a_0, a_1, a_2)$, alors
     \[ a \in \mathfrak{J} \implies a_0 \geq a_1 + a_2 \]
 \end{proposition}
 
@@ -247,6 +285,16 @@ On constate que la réciproque n'est pas vraie, par exemple prenons $(13, 7, 4)$
     Soit $a=(a_0, a_1, a_2)$ un éclatement d'une singularité $[a]$
 
     Alors $[a]$ est de type $\mathfrak{J}$ $\implies \exists p, q: a_0 = p*a_1 + q*a_2$
+\end{conjecture}
+
+\begin{conjecture}
+    (strict) Soit $[a] = ([a_1], \dots, [a_m]) \in \mathfrak{J}, m \geq 2$
+
+    Alors $|\{ a_i \in [a] \mid a_i == 1 \} \geq m - 2$
+\end{conjecture}
+
+\begin{conjecture}
+    Si $[a] \in \mathfrak{J}$, alors son représentant naturel $a \in [a]$ offre une suite d'éclatement montrant $[a] \in \mathfrak{J}$
 \end{conjecture}
 
 

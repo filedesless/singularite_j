@@ -63,67 +63,58 @@ def choix_coprime(bs):
     return filter(all_coprime, choix(bs))
 
 
-def eclatements(bs):
-    assert all_coprime(bs)  # condition 1
-    rest = list(enumerate(bs))[1:]
-    # let m = len(bs) - 1, yields up to m elements
-    return {tuple([bi] + [(-bs[0] if j == i else bj) % bi for (j, bj) in rest])
-            for (i, bi) in rest if bi > 1}
+def eclatements(n, xs):
+    assert all_coprime([n, *xs])  # condition 1
+    return {(bi, tuple((-n if i == j else bj) % bi for (j, bj) in enumerate(xs)))
+            for (i, bi) in enumerate(xs) if bi > 1}
 
 
-assert eclatements((5, 3, 2, 1)) == {(2, 1, 1, 1), (3, 1, 2, 1)}
-
-
-def lisse(bs):
-    _, *t = bs
-    return set(t) == {1}
-
-
-assert lisse((2, 1, 1, 1))
-assert not lisse((3, 1, 2, 1))
+assert eclatements(5, (3, 2, 1)) == {(2, (1, 1, 1)), (3, (1, 2, 1))}
 
 
 @cache
-def isJStrict_(bs):
+def isJStrict_(n, xs):
     # if lisse(bs):
     #     return True
     # if not all_coprime(bs):
     #     return False
     # return all(isJStrict(cs) for cs in eclatements(bs))
-    stack = [bs]
+    stack = [(n, xs)]
     while len(stack) > 0:
-        current = stack.pop()
-        if not all_coprime(current):
+        ni, bs = stack.pop()
+        if not all_coprime([ni, *bs]):
             return False
-        if not lisse(current):
-            for cs in eclatements(current):
+        if set(bs) != {1}:  # not lisse
+            for cs in eclatements(ni, bs):
                 stack.append(cs)
     return True
 
 
-def isJStrict(bs):
-    a, b, c = bs[:3]
-    if len(bs) == 3:
-        if a == b + c:  # prop 1
+def isJStrict(n, xs):
+    a, b = xs[:2]
+    if len(xs) == 2:
+        if n == a + b:  # prop 1
             return True
-        if a < b + c:  # prop 4
+        if n < a + b:  # prop 4
             return False
-    h, *t = bs
     # by prop 2 and 3
-    ans = isJStrict_((h % prod(t), *sorted(t)))
-    if len(bs) == 3 and ans:
+    ans = isJStrict_(n % prod(xs), tuple(sorted(xs)))
+    if len(xs) == 2 and ans:
         # conjecture 1
-        if a < (s := b + c + gcd(a - b, a - c)):
-            assert s == a + 1
+        if n < (s := a + b + gcd(n - a, n - b)):
+            assert s == n + 1
+        # conjecture 2
+        assert len([(p, q) for p in range(n)
+                   for q in range(n) if p*a + q*b == n]) != 0
+    if ans:
         # conjecture 3
-        assert len([(p, q) for p in range(a)
-                   for q in range(a) if p*b + q*c == a]) != 0
+        assert len([x for x in xs if x == 1]) >= len(xs) - 2
     return ans
 
 
-assert isJStrict((2, 1, 1, 1))
-assert isJStrict((3, 1, 2, 1))
-assert isJStrict((5, 3, 2, 1))
+assert isJStrict(2, (1, 1, 1))
+assert isJStrict(3, (1, 2, 1))
+assert isJStrict(5, (3, 2, 1))
 
 
 @cache
