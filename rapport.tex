@@ -5,6 +5,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[a4paper]{geometry}
 
 \title{Caractérisation des singularités de type $\mathfrak{J}$}
 \author{Félix Larose-Gervais}
@@ -14,7 +16,7 @@
 \newtheorem{definition}{Définition}
 \newtheorem{proposition}{Proposition}
 \newtheorem{conjecture}{Conjecture}
-\newtheorem{exemple}{Exemple}
+\newtheorem{example}{Exemple}
 
 \begin{document}
 
@@ -30,16 +32,18 @@
 
 \subsection{Notations}
 
+Soit $a, b \in \mathbb{Z}$ on note la relation de coprimalité $\perp$
+
+\[ a \perp b \iff \gcd(a, b) = 1 \]
 Soit $m, n \in \mathbb{N}$, $X$ un ensemble, notons 
 
 \begin{itemize}
     \item $Sym(X)$ le groupe de bijections de $X$ dans lui-même
     \item $Sym(m)$ le groupe de bijections $Sym(\{1, \dots, m \})$ 
     \item $\mathbb{Z}_n$ l'anneau des entiers modulo n ($\mathbb{Z}/n\mathbb{Z}$)
-    \item $\mathbb{Z}_n^\times$ son groupe d'inversibles ($\{ a \in \mathbb{Z}_n \mid \gcd(a, n) = 1 \})$
+    \item $\mathbb{Z}_n^\times$ son groupe d'inversibles ($\{ a \in \mathbb{Z}_n \mid a \perp n \})$
     \item $X^m$ les m-uplets de $X$ $(\underbrace{X \times \cdots \times X}_{m fois})$
 \end{itemize}
-
 On notera aussi $S_n^m$ les m-uplets d'inversibles modulo n $({\mathbb{Z}_n^\times}^m)$
 
 \subsection{Définitions}
@@ -55,7 +59,7 @@ On notera aussi $S_n^m$ les m-uplets d'inversibles modulo n $({\mathbb{Z}_n^\tim
     Un \textbf{éclatement} $a \in \mathbb{Z}^m$ d'une singularité $[a] \in S_n^m$ (noté $a \in [a]$) est un choix de 
     représentant $a = (a_1, \dots, a_m)$ tel que
     \begin{align*}
-        \forall i \neq j : \gcd(a_i, a_j) = 1
+        \forall i \neq j & : a_i \perp a_j
     \end{align*}
     On note $E_a$ l'ensemble des singularités associées à l'éclatement $a$ comme suit:
     \begin{align*}
@@ -71,7 +75,7 @@ On notera aussi $S_n^m$ les m-uplets d'inversibles modulo n $({\mathbb{Z}_n^\tim
 \end{definition}
 
 \begin{definition}
-    Un éclatement $a \in [a]$ est dit \textbf{lisse} si $E_a = \emptyset$
+    Un éclatement $a \in [a]$ est dit \textbf{lisse} si $a = (1, \dots, 1)$
 \end{definition}
 
 \begin{definition}
@@ -94,26 +98,23 @@ Soit $a, b \in \mathbb{Z}$, on calcule le PGCD comme suit
         \gcd(b, a \mod b) & \text{ sinon}
     \end{cases}
 \end{align*}
-
 Avec $k \in \mathbb{Z}$, on a les propriétés suivantes:
-\begin{align}
-\gcd(a, 1) & = 1 \\
-\gcd(a, b) & = \gcd(b, a) \\
-\gcd(a, b) & = \gcd(a + kb, b)
-\end{align}
-
+\begin{align*}
+    \gcd(a, 1) & = 1 \\
+    \gcd(a, b) & = \gcd(b, a) \\
+    \gcd(a, b) &= \gcd(a, -b) \\
+    \gcd(a, b) & = \gcd(a, b + ka)
+\end{align*}
 De la dernière on déduit directement, pour $n \in \mathbb{N}$
 \begin{align*}
-    a &\equiv b \pmod n \\ \implies \gcd(a, n) &= \gcd(b, n)
+        a \equiv b \pmod n \implies \gcd(a, n) = \gcd(b, n)
 \end{align*}
 
 \subsubsection{Théorème des restes chinois}
 
 Soit $m, n_1, \dots, n_m \in \mathbb{N}$ et $a_1, \dots, a_m \in \mathbb{Z}$, notons le produit $n = n_1 \cdots n_m$
 
-Si $\forall i \neq j : \gcd(n_i, n_j) = 1$
-
-Alors $\exists!x \in \mathbb{Z}_n$ tel que
+Si $\forall i \neq j : n_i \perp n_j$, alors $\exists!x \in \mathbb{Z}_n$ tel que
 \begin{align*}
     x &\equiv a_1 \pmod {n_1} \\
     &\vdotswithin{\equiv} \\
@@ -129,24 +130,26 @@ Résultats utiles, dûs à Habib Jaber.
     \[ {[(a_1, a_2)]}_{a_1+a_2} \in \mathfrak{J} \]
 \end{proposition}
 
-\begin{exemple}
+\begin{example}
     $\gcd(2, 1) = 1 \implies {[(2, 1)]}_3 \in \mathfrak{J}$
-\end{exemple}
+\end{example}
 
 \begin{proposition}
     \[ 
-    [(a_1, a_2)]_n \in \mathfrak{J} \iff 
+    {[(a_1, a_2)]}_n \in \mathfrak{J} \iff 
     \forall k \in \mathbb{Z}: {[(a_1, a_2)]}_{n+ka_1a_2} \in \mathfrak{J} 
     \]
 \end{proposition}
 
-\begin{exemple}
-    $[(2, 1)]_3 \in \mathfrak{J} \implies {[(2, 1)]}_5 \in \mathfrak{J},\; {[(2, 1)]}_7 \in \mathfrak{J}, \dots$
-\end{exemple}
+\begin{example}
+    ${[(2, 1)]}_3 \in \mathfrak{J} \implies {[(2, 1)]}_5 \in \mathfrak{J},\; {[(2, 1)]}_7 \in \mathfrak{J}, \dots$
+\end{example}
 
 \newpage
 
 \section{Propositions}
+
+\subsection{Ordre des poids}
 
 Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S_n^m)$
 
@@ -198,9 +201,9 @@ Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S
     \end{enumerate}
 \end{proof}
 
-\begin{exemple}
-    Sachant $[(3, 2)]_5 \in \mathfrak{J}$, on en déduit $[(2, 3)]_5 \in \mathfrak{J}$
-\end{exemple}
+\begin{example}
+    Sachant ${[(3, 2)]}_5 \in \mathfrak{J}$, on en déduit ${[(2, 3)]}_5 \in \mathfrak{J}$
+\end{example}
 
 \newpage
 
@@ -230,9 +233,11 @@ Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S
     Donc $a^1$ vérifie la condition initiale, on répète le raisonnement avec $a^1$
 \end{proof}
 
-\begin{exemple}
+\begin{example}
     $(5, 4, 3) \not \in \mathfrak{J}$ car $5 < 7$
-\end{exemple}
+\end{example}
+
+\subsection{Existence d'un éclatement}
 
 \begin{proposition}
     Toute singularité admet un éclatement
@@ -243,7 +248,7 @@ Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S
 
     Prenons $(a_1, \dots, a_m) \in [a]$ son représentant naturel
 
-    On cherche $(b_1, \dots, b_m) \in [a]$ tels que $\forall i \neq j : \gcd(b_i, b_j) = 1$
+    On cherche $(b_1, \dots, b_m) \in [a]$ tels que $\forall i \neq j : b_i \perp b_j$ et $\forall i : b_i \perp n$
 
     Il suffit de prendre $b_1 = a_1$ et $\forall i = 2..m$, un $b_i$ vérifiant
     \begin{align*}
@@ -255,15 +260,44 @@ Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S
 
     De tels $b_i$ existent par le théorème des restes chinois
 
-    On vérifie la coprimalité sachant, étant donné $a, b \in \mathbb{Z}$ et $c \in \mathbb{N}$
-    \begin{align*}
-        \gcd(a, 1) =1 \text{ et } a \equiv b \pmod c \implies \gcd(a, c) = \gcd(b, c)
-    \end{align*}
+    On vérifie les coprimalités nécéssaires grâce aux propriétés de $\gcd$
 
-    On a donc
+    On a par la première congruence $\forall i : b_i \perp n$ (puisque $\forall i : a_i \perp n$)
+
+    Et par les suivantes $\forall i \neq j : b_i \perp b_j$
+
+    On a donc $b = (b_1, \dots, b_m)$ un éclatement de $[a]$
+\end{proof}
+
+\newpage
+
+\subsection{Caractérisation des singularités de type \texorpdfstring{$\mathfrak{J}$}{J} à 1 poids}
+
+On sait déjà que la condition de coprimalité est nécéssaire à être de type $\mathfrak{J}$. 
+
+On montre maintenant qu'elle est en fait suffisante
+
+\begin{proposition}
+    Soit $a, n \in \mathbb{Z}$, alors
+
+    \[ a \perp n \implies {[a]}_n \in \mathfrak{J} \]
+\end{proposition}
+
+\begin{proof}
+    Soit $[a] \in S_n^1$, on prend $a \in [a]$ son représentant naturel $(a < n)$
+
+    Si $a = 1$, alors $[a] \in \mathfrak{J}$
+
+    Sinon, prenons le singleton $E_a = \{ (-n \mod a) \in S_n^1 \}$
+
+    Il suffit de montrer que $(-n \mod a) \perp a$ pour répéter le raisonnement
+
+    Or on a, grâce aux propriétés de $\gcd$
     \begin{align*}
-        \forall i : \gcd(b_i, n) = 1 \\
-        \forall i\neq j : \gcd(b_i, b_j) = 1
+        a \perp n &\implies a \perp n - a \\
+        &\implies a \perp a - n \\
+        &\implies a \perp (-n \mod a) \\
+        &\implies (-n \pmod a) \perp a
     \end{align*}
 \end{proof}
 

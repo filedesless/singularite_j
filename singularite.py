@@ -91,8 +91,8 @@ def isJStrict_(n, xs):
 
 
 def isJStrict(n, xs):
-    a, b = xs[:2]
     if len(xs) == 2:
+        a, b = xs[:2]
         if n == a + b:  # prop 1
             return True
         if n < a + b:  # prop 4
@@ -100,6 +100,7 @@ def isJStrict(n, xs):
     # by prop 2 and 3
     ans = isJStrict_(n % prod(xs), tuple(sorted(xs)))
     if len(xs) == 2 and ans:
+        a, b = xs[:2]
         # conjecture 1
         if n < (s := a + b + gcd(n - a, n - b)):
             assert s == n + 1
