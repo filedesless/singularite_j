@@ -149,6 +149,73 @@ Résultats utiles, dûs à Habib Jaber.
 
 \section{Propositions}
 
+\subsection{Existence d'un éclatement}
+
+\textbf{Question:} La condition de coprimalité 2-à-2 est-elle contraignante? Existe-t-il des 
+singularités n'admettant aucun éclatement?
+
+\begin{proposition}
+    Toute singularité isolée admet un éclatement
+\end{proposition}
+
+\begin{proof}
+    Soit $[a] = ([a_1], \dots, [a_m]) \in S_n^m$
+
+    Prenons $(a_1, \dots, a_m) \in [a]$ son représentant naturel
+
+    On cherche $(b_1, \dots, b_m) \in [a]$ tels que $\forall i \neq j : b_i \perp b_j$ et $\forall i : b_i \perp n$
+
+    Il suffit de prendre $b_1 = a_1$ et $\forall i = 2..m$, un $b_i$ vérifiant
+    \begin{align*}
+        b_i & \equiv a_i \pmod n \\
+        b_i & \equiv 1 \pmod {b_1} \\
+            & \vdotswithin{\equiv} \\
+        b_i & \equiv 1 \pmod {b_{i-1}} 
+    \end{align*}
+
+    De tels $b_i$ existent par le théorème des restes chinois
+
+    On vérifie les coprimalités nécéssaires grâce aux propriétés de $\gcd$
+
+    On a par la première congruence $\forall i : b_i \perp n$ (puisque $\forall i : a_i \perp n$)
+
+    Et par les suivantes $\forall i \neq j : b_i \perp b_j$
+
+    On a donc $b = (b_1, \dots, b_m)$ un éclatement de $[a]$
+\end{proof}
+
+\subsection{Caractérisation des singularités de type \texorpdfstring{$\mathfrak{J}$}{J} à 1 poids}
+
+On sait déjà que la condition de coprimalité est nécéssaire à être de type $\mathfrak{J}$. 
+
+On montre maintenant qu'elle est en fait suffisante (pour 1 poids)
+
+\begin{proposition}
+    Soit $a, n \in \mathbb{Z}$, alors
+
+    \[ a \perp n \implies {[a]}_n \in \mathfrak{J} \]
+\end{proposition}
+
+\begin{proof}
+    Soit $[a] \in S_n^1$, on prend $a \in [a]$ son représentant naturel $(a < n)$
+
+    Si $a = 1$, alors $[a] \in \mathfrak{J}$
+
+    Sinon, prenons le singleton $E_a = \{ (-n \mod a) \in S_n^1 \}$
+
+    Il suffit de montrer que $(-n \mod a) \perp a$ pour répéter le raisonnement
+
+    Or on a, grâce aux propriétés de $\gcd$
+    \begin{align*}
+        a \perp n &\implies a \perp n - a \\
+        &\implies a \perp a - n \\
+        &\implies a \perp (-n \mod a) \\
+        &\implies (-n \pmod a) \perp a
+    \end{align*}
+\end{proof}
+
+\newpage
+
 \subsection{Ordre des poids}
 
 Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S_n^m)$
@@ -236,70 +303,6 @@ Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S
 \begin{example}
     $(5, 4, 3) \not \in \mathfrak{J}$ car $5 < 7$
 \end{example}
-
-\subsection{Existence d'un éclatement}
-
-\begin{proposition}
-    Toute singularité admet un éclatement
-\end{proposition}
-
-\begin{proof}
-    Soit $[a] = ([a_1], \dots, [a_m]) \in S_n^m$
-
-    Prenons $(a_1, \dots, a_m) \in [a]$ son représentant naturel
-
-    On cherche $(b_1, \dots, b_m) \in [a]$ tels que $\forall i \neq j : b_i \perp b_j$ et $\forall i : b_i \perp n$
-
-    Il suffit de prendre $b_1 = a_1$ et $\forall i = 2..m$, un $b_i$ vérifiant
-    \begin{align*}
-        b_i & \equiv a_i \pmod n \\
-        b_i & \equiv 1 \pmod {b_1} \\
-            & \vdotswithin{\equiv} \\
-        b_i & \equiv 1 \pmod {b_{i-1}} 
-    \end{align*}
-
-    De tels $b_i$ existent par le théorème des restes chinois
-
-    On vérifie les coprimalités nécéssaires grâce aux propriétés de $\gcd$
-
-    On a par la première congruence $\forall i : b_i \perp n$ (puisque $\forall i : a_i \perp n$)
-
-    Et par les suivantes $\forall i \neq j : b_i \perp b_j$
-
-    On a donc $b = (b_1, \dots, b_m)$ un éclatement de $[a]$
-\end{proof}
-
-\newpage
-
-\subsection{Caractérisation des singularités de type \texorpdfstring{$\mathfrak{J}$}{J} à 1 poids}
-
-On sait déjà que la condition de coprimalité est nécéssaire à être de type $\mathfrak{J}$. 
-
-On montre maintenant qu'elle est en fait suffisante
-
-\begin{proposition}
-    Soit $a, n \in \mathbb{Z}$, alors
-
-    \[ a \perp n \implies {[a]}_n \in \mathfrak{J} \]
-\end{proposition}
-
-\begin{proof}
-    Soit $[a] \in S_n^1$, on prend $a \in [a]$ son représentant naturel $(a < n)$
-
-    Si $a = 1$, alors $[a] \in \mathfrak{J}$
-
-    Sinon, prenons le singleton $E_a = \{ (-n \mod a) \in S_n^1 \}$
-
-    Il suffit de montrer que $(-n \mod a) \perp a$ pour répéter le raisonnement
-
-    Or on a, grâce aux propriétés de $\gcd$
-    \begin{align*}
-        a \perp n &\implies a \perp n - a \\
-        &\implies a \perp a - n \\
-        &\implies a \perp (-n \mod a) \\
-        &\implies (-n \pmod a) \perp a
-    \end{align*}
-\end{proof}
 
 \section{Conjectures}
 
