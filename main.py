@@ -18,7 +18,7 @@ def count(n: int):
     elem = group(n)
     # expect = {(i, j) for i in elem for j in elem
     #           if 1 in {i, j} or i + j == n}
-    actual = [(i, j) for i in elem for j in elem if isJStrict((n, i, j))]
+    actual = [(i, j) for i in elem for j in elem if isJStrict(n, (i, j))]
     # return expect == actual
     return len(actual)
 
@@ -36,14 +36,14 @@ def is_nice(n: int):
 
 def is_nice3d(n: int):
     g = group(n)
-    pts = [p for p in product(g, repeat=3) if isJStrict((n, *p))]
+    pts = [p for p in product(g, repeat=3) if isJStrict(n, p)]
     phi = len(g)
     return len(pts) == 6*phi-8
 
 
 def show(n: int):
     header = group(n)
-    rows = [[(str(s) if n < (s := a + b + gcd(n - a, n - b)) else 'X') if isJStrict((n, a, b)) else ' '
+    rows = [[(str(s) if n < (s := a + b + gcd(n - a, n - b)) else 'X') if isJStrict(n, (a, b)) else ' '
              for b in header]
             for a in header]
     print(tabulate(rows, headers=[n]+header,
