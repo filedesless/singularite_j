@@ -1,6 +1,7 @@
 from math import gcd, prod
 from typing import List
 from functools import cache
+from itertools import combinations
 
 
 def coprime(x: int, y: int) -> bool:
@@ -10,15 +11,7 @@ def coprime(x: int, y: int) -> bool:
 
 def all_coprime(xs: List[int]) -> bool:
     """Tells if all elements of a list are 2-by-2 coprime"""
-    if len(xs) < 2:
-        return True
-    # h, *t = xs
-    # return all(coprime(h, x) for x in t) and all_coprime(t)
-    for i in range(len(xs)):
-        for j in range(i):
-            if not coprime(xs[i], xs[j]):
-                return False
-    return True
+    return all(coprime(*pair) for pair in combinations(xs, 2))
 
 
 def singularite(b0: int, m: int):
@@ -91,26 +84,16 @@ def isJStrict_(n, xs):
 
 
 def isJStrict(n, xs):
+    xs = tuple(x for x in sorted(xs) if x > 1)
+    if not xs:
+        return True
     if len(xs) == 2:
         a, b = xs[:2]
         if n == a + b:  # prop 1
             return True
         if n < a + b:  # prop 4
             return False
-    # by prop 2 and 3
-    ans = isJStrict_(n % prod(xs), tuple(sorted(xs)))
-    if len(xs) == 2 and ans:
-        a, b = xs[:2]
-        # conjecture 1
-        if n < (s := a + b + gcd(n - a, n - b)):
-            assert s == n + 1
-        # conjecture 2
-        assert len([(p, q) for p in range(n)
-                   for q in range(n) if p*a + q*b == n]) != 0
-    if ans:
-        # conjecture 3
-        assert len([x for x in xs if x == 1]) >= len(xs) - 2
-    return ans
+    return isJStrict_(n % prod(xs), xs)
 
 
 assert isJStrict(2, (1, 1, 1))

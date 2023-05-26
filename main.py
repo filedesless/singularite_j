@@ -58,11 +58,11 @@ def phi(n: int):
 def main():
     for n in range(2, 100):
         g = group(n)
-        pts = [xs for xs in product(g, repeat=4) if isJStrict(n, xs)]
+        pts = [xs for xs in product(g, repeat=3) if isJStrict(n, xs)]
         print(n, len(pts))
-        for xs in pts:
-            if isJStrict(n, xs):
-                assert len([x for x in xs if x == 1]) >= 2
+        # for xs in pts:
+        #     if isJStrict(n, xs):
+        #         assert len([x for x in xs if x == 1]) >= 2
 
         # print(i, phi(i), is_nice(i), is_nice3d(i))
         # assert is_nice(i) == is_nice3d(i)

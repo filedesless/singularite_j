@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
+\graphicspath{{./images/}}
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
 \usepackage{amsmath}
@@ -12,17 +13,16 @@
 \author{Félix Larose-Gervais}
 \date{Mai 2023}
 
-
 \newtheorem{definition}{Définition}
 \newtheorem{proposition}{Proposition}
 \newtheorem{conjecture}{Conjecture}
 \newtheorem{example}{Exemple}
+\newtheorem{corollary}{Corollaire}
+\renewcommand*{\proofname}{Preuve}
 
 \begin{document}
 
 \maketitle
-
-\newpage
 
 \tableofcontents
 
@@ -42,9 +42,9 @@ Soit $m, n \in \mathbb{N}$, $X$ un ensemble, notons
     \item $Sym(m)$ le groupe de bijections $Sym(\{1, \dots, m \})$ 
     \item $\mathbb{Z}_n$ l'anneau des entiers modulo n ($\mathbb{Z}/n\mathbb{Z}$)
     \item $\mathbb{Z}_n^\times$ son groupe d'inversibles ($\{ a \in \mathbb{Z}_n \mid a \perp n \})$
-    \item $X^m$ les m-uplets de $X$ $(\underbrace{X \times \cdots \times X}_{m fois})$
+    \item $X^m$ l'ensemble des m-uplets de $X$ $(\underbrace{X \times \cdots \times X}_{m fois})$
 \end{itemize}
-On notera aussi $S_n^m$ les m-uplets d'inversibles modulo n $({\mathbb{Z}_n^\times}^m)$
+On notera aussi $S_n^m$ l'ensemble des m-uplets d'inversibles modulo n $({({\mathbb{Z}_n^\times})}^m)$
 
 \subsection{Définitions}
 
@@ -82,6 +82,11 @@ On notera aussi $S_n^m$ les m-uplets d'inversibles modulo n $({\mathbb{Z}_n^\tim
     La singularité $[a]$ est dite de \textbf{type $\mathfrak{J}$} (noté $[a] \in \mathfrak{J}$) ssi
     \begin{align*}
         \exists a \in [a] : \forall [a^i] \in E_a : [a^i] \in \mathfrak{J}
+    \end{align*}
+    On parlera de \textbf{type $\mathfrak{J}$ strict} (noté $[a] \in \overline{\mathfrak{J}}$) lorsque 
+    pour $a \in [a]$ l'éclatement naturel de $[a]$ on a
+    \begin{align*}
+        \forall [a^i] \in E_a : [a^i] \in \overline{\mathfrak{J}}
     \end{align*}
 \end{definition}
 
@@ -149,10 +154,9 @@ Résultats utiles, dûs à Habib Jaber.
 
 \section{Propositions}
 
-\subsection{Existence d'un éclatement}
+Soit $m, n \in \mathbb{N}$ tels que $m > 2$, et une singularité $[a] = ([a_1], \dots, [a_m]) \in S_n^m$
 
-\textbf{Question:} La condition de coprimalité 2-à-2 est-elle contraignante? Existe-t-il des 
-singularités n'admettant aucun éclatement?
+\subsection{Existence d'un éclatement}
 
 \begin{proposition}
     Toute singularité isolée admet un éclatement
@@ -184,154 +188,165 @@ singularités n'admettant aucun éclatement?
     On a donc $b = (b_1, \dots, b_m)$ un éclatement de $[a]$
 \end{proof}
 
-\subsection{Caractérisation des singularités de type \texorpdfstring{$\mathfrak{J}$}{J} à 1 poids}
+\subsection{Invariants}
 
-On sait déjà que la condition de coprimalité est nécéssaire à être de type $\mathfrak{J}$. 
+\subsubsection{Ordre des poids}
 
-On montre maintenant qu'elle est en fait suffisante (pour 1 poids)
+Soit $\sigma \in Sym(m)$, $\pi_{\sigma} \in Sym(S_n^m)$, 
 
 \begin{proposition}
-    Soit $a, n \in \mathbb{Z}$, alors
+    Le réarrangement des poids préserve le type $\mathfrak{J}$
 
-    \[ a \perp n \implies {[a]}_n \in \mathfrak{J} \]
+    Notons $[b] = \pi_{\sigma}([a])$
+    \[ [a] \in \mathfrak{J} \implies [b] \in \mathfrak{J} \]
 \end{proposition}
 
 \begin{proof}
-    Soit $[a] \in S_n^1$, on prend $a \in [a]$ son représentant naturel $(a < n)$
+    Il suffit d'observer que $E_a \cong E_b$
+\end{proof}
 
-    Si $a = 1$, alors $[a] \in \mathfrak{J}$
+\subsubsection{Ajout de poids}
 
-    Sinon, prenons le singleton $E_a = \{ (-n \mod a) \in S_n^1 \}$
+\begin{proposition}
+    L'ajout de poids congrus à 1 modulo n préserve le type $\mathfrak{J}$
 
-    Il suffit de montrer que $(-n \mod a) \perp a$ pour répéter le raisonnement
-
-    Or on a, grâce aux propriétés de $\gcd$
+    Notons $[b] = ([a_1], \dots, [a_m], [1]) \in S_n^{m+1}$
     \begin{align*}
-        a \perp n &\implies a \perp n - a \\
-        &\implies a \perp a - n \\
-        &\implies a \perp (-n \mod a) \\
-        &\implies (-n \pmod a) \perp a
+        [a] \in \mathfrak{J} \implies [b] \in \mathfrak{J}
     \end{align*}
+\end{proposition}
+
+\begin{proof}
+    Il suffit d'observer que $E_a \cong E_b$
+\end{proof}
+
+\subsubsection{Retrait de poids}
+
+\begin{proposition}
+    Le retrait de poids préserve le type $\mathfrak{J}$
+
+    Notons $[b] = ([a_1], \dots, [a_{m-1}]) \in S_n^{m-1}$
+    \begin{align*}
+        [a] \in \mathfrak{J} \implies [b] \in \mathfrak{J}
+    \end{align*}
+\end{proposition}
+
+\begin{proof}
+    TODO
 \end{proof}
 
 \newpage
 
-\subsection{Ordre des poids}
-
-Soit $\sigma \in Sym(m)$, et ces permutations associées $\pi_{\sigma} \in Sym(S_n^m)$
+\subsection{Caractérisation stricte}
 
 \begin{proposition}
-    L'ordre des poids d'une singularité n'affecte pas le type $\mathfrak{J}$
-    \[ [a] \in \mathfrak{J} \implies \pi_{\sigma}([a]) \in \mathfrak{J} \]
-\end{proposition}
+    Soit $[a] \in S_n^2$, d'éclatement naturel $a = (a_1, a_2) \in \mathbb{Z}^2$
+    \[ [a] \in \overline{\mathfrak{J}} \implies n \geq a_1 + a_2 \]
+\end{proposition} 
 
 \begin{proof}
-    Pour $a = (a_1, \dots, a_m) \in [a]$ tel que $\forall [a^i] \in E_a : [a^i] \in \mathfrak{J}$, on a
+    Par contraposée, supposons $n < a_1 + a_2$ ($\star$)
 
-    \begin{enumerate}
-    \item Cas de base: $E_a = \emptyset$
+    \begin{itemize}
+        \item Si $a_1 = a_2$ ($\neq 1$ par ($\star$))
 
-        On a donc $a = (1, \dots, 1)$
+            Alors $[a] \not \in \overline{\mathfrak{J}}$
+        \item Sinon, $a_1 \neq a_2$, supposons sans perdre de généralité que $a_1 > a_2$
 
-        Ainsi $[a] = ([1], \dots, [1]) = \pi_{\sigma}([a]) \in \mathfrak{J}$
+            Considérons $a^1$ l'éclatement naturel de $[a^1] \in E_a$ la singularité associée à $a_1$
 
-    \item Induction structurelle
+            On a $a^1 = (-n \mod a_1,\; a_2 \mod a_1)$
 
-        Supposons $\forall [a^i] \in E_a : [a^i] \in \mathfrak{J} \implies \pi_{\sigma}([a^i]) \in \mathfrak{J}$
-        \begin{align*}
-            E_a & = \{ [a^i] \in S_{a_i}^m \mid \forall i = 1..m,\; a_i > 1 \} \\
-            [a^i] & = ([a_1^i], \dots, [a_m^i]) \\
-            [a_j^i] &\equiv \begin{cases}
-                    -n &\text{si } i = j \\
-                    a_j &\text{sinon}
-                \end{cases} \pmod{a_i} \quad \forall j = 1..m
-        \end{align*}
+            Puisque $a_1 > a_2$, on a $2a_1 > a_1 + a_2 > n$, donc $a_1 < n < 2a_1$
 
-        Considérons, pour $b = (b_1, \dots, b_m) = (a_{\sigma(1)}, \dots, a_{\sigma(m)}) \in \pi_{\sigma}([a])$
-        \begin{align*}
-            E_b & = \{ [b^i] \in S_{b_i}^m \mid \forall i = 1..m,\; b_i > 1 \} \\
-            [b^i] & = ([b_1^i], \dots, [b_m^i]) \\
-            [b_j^i] & \equiv \begin{cases}
-                    -n &\text{si } i = j \\
-                    b_j &\text{sinon}
-                \end{cases} \pmod{b_i} \quad \forall j = 1..m \\
-                & \equiv \begin{cases}
-                    -n &\text{si } \sigma(i) = \sigma(j) \\
-                    a_{\sigma(j)} &\text{sinon}
-                \end{cases} \pmod {a_{\sigma(i)}} \\
-                & \equiv [a_{\sigma(j)}^{\sigma(i)}] \\
-            [b^i] & = ([a_{\sigma(1)}^{\sigma(i)}], \dots, [a_{\sigma(m)}^{\sigma(i)}]) \\
-                & = \pi_{\sigma}([a^{\sigma(i)}]) \in \mathfrak{J}
-        \end{align*}
+            On en déduit $(-n \mod a_1) = 2a_1 - n$
 
-        Ainsi $\pi_{\sigma}([a]) \in \mathfrak{J}$
-    \end{enumerate}
+            Aussi, $(a_2 \mod a_1) = a_2$ car $a_1 > a_2$
+
+            On a donc $a^1 = (2a_1-n,\; a_2)$
+
+            Puisque $n < a_1 + a_2$, on a $a_1 < 2a_1 - n + a_2$
+
+            Donc $[a^1] \in S_{a_1}^2$ vérifie la condition ($\star$), on répète le raisonnement avec $[a^1]$
+    \end{itemize}
 \end{proof}
 
 \begin{example}
-    Sachant ${[(3, 2)]}_5 \in \mathfrak{J}$, on en déduit ${[(2, 3)]}_5 \in \mathfrak{J}$
+    ${[4, 3]}_5 \not \in \overline{\mathfrak{J}}$ car $5 < 4 + 3$
 \end{example}
+
+\begin{figure}[h]
+    \caption{Singularités $s \in S_{32}^2$ telles que $s \in \overline{\mathfrak{J}}$}
+    \centering
+    \includegraphics[width=0.7\textwidth]{singularite_j_strict_m2_n32}
+\end{figure}
 
 \newpage
-
-\begin{proposition}
-    (strict, rework) Soit $a=(a_0, a_1, a_2)$, alors
-    \[ a \in \mathfrak{J} \implies a_0 \geq a_1 + a_2 \]
-\end{proposition}
-
-\begin{proof}
-    Supposons $a_0 < a_1 + a_2$
-
-    Si $a_1 = a_2$, alors $\neg \mathfrak{J}(a)$
-
-    Sinon, $a_1 \neq a_2$, supposons sans perdre de généralité que $a_1 > a_2$
-
-    Considérons l'éclatement $a^1 = (a_1,\; -a_0 \mod a_1,\; a_2 \mod a_1) \in E_a$
-    \begin{align*}
-        a_1 > a_2 & \implies 2a_1 > a_1+a_2               \\
-                  & \implies (-a_0 \mod a_1) = 2a_1 - a_0 \\
-        a_1 > a_2 & \implies (a_2 \mod a_1) = a_2
-    \end{align*}
-
-    On a donc $a^1 = (a_1, 2a_1-a_0, a_2)$
-
-    Puisque $a_0 < a_1 + a_2$, on a $a_1 < 2a_1 - a_0 + a_2$
-
-    Donc $a^1$ vérifie la condition initiale, on répète le raisonnement avec $a^1$
-\end{proof}
-
-\begin{example}
-    $(5, 4, 3) \not \in \mathfrak{J}$ car $5 < 7$
-\end{example}
 
 \section{Conjectures}
 
 \begin{conjecture}
-    Soit $a=(a_0, a_1, a_2)$ un éclatement d'une singularité $[a]$
-
-    Posons $s = a_1 + a_2 + \gcd(a_0-a_1, a_0-a_2)$
-
-    Supposons $a_0 < s$
-
-    Alors $[a]$ est de type $\mathfrak{J}$ $\implies s = a_0 + 1$
+    Soit $[a] \in S_n^m$ de représentant naturel $a = (a_1, \dots, a_m) \in \mathbb{Z}^m$
+    \begin{align*}
+        [a] \in \overline{\mathfrak{J}} \implies |\{ a_i \in a \mid a_i > 1 \}| \leq 2
+    \end{align*}
 \end{conjecture}
 
-On constate que la réciproque n'est pas vraie, par exemple prenons $(13, 7, 4)$, on a $s = 14$, vérifiant donc $a_0 < 14$ et $a_0 + 1 = 14$, or elle n'est pas de type $\mathfrak{J}$.
+\begin{proof}
+    Par contraposée, supposons $1 < a_1, a_2, a_3$ ($\star$)
+
+    \begin{itemize}
+        \item Si $\exists i \neq j : a_i = a_j \neq 1$
+        
+            Alors $[a] \not \in \overline{\mathfrak{J}}$
+        \item Sinon ($\forall i \neq j, a_i \neq 1 : a_i \neq a_j$)
+        
+            Supposons sans perdre de généralité $a_1 > a_2 > a_3 > \cdots \geq a_m$ (Donc $a_1 \geq 4$)
+
+            Considérons $a^1$ l'éclatement naturel de $[a^1] \in E_a$ la singularité associée à $a_1$
+
+            On a $a^1 = (-n \mod {a_1}, a_2 \mod {a_1}, \dots, a_m \mod {a_1}) = (-n \mod {a_1}, a_2, \dots, a_m)$
+
+            On sait que $(-n \mod {a_1}) \neq 0$ car $a_1 \perp n$
+
+            Il suffit de montrer que $(-n \mod {a_1}) \neq 1$ pour que $[a^1]$ vérifie $(\star)$
+
+            Impossible (contre-exemple: (5, 3, 2) mod 29)
+
+            Tous ces éclatements ont m=2, or pas j strict
+    \end{itemize}
+\end{proof}
+
+\begin{figure}[h]
+    \caption{Singularités $s \in S_{13}^3$ telles que $s \in \overline{\mathfrak{J}}$}
+    \centering
+    \includegraphics[width=0.6\textwidth]{singularite_j_strict_m3_n13}
+\end{figure}
+
+\begin{corollary}
+    Soit la singularite $[a] \in S_n^m$ de représentant naturel $a = (a_1, a_2, \dots, a_m) \in \mathbb{Z}^m$
+
+    Supposons sans perdre de généralité que $a_1 > a_2 > \cdots > a_m$, alors
+    \begin{align*}
+        [a] \in \overline{\mathfrak{J}} \iff a_3 = \cdots = a_m = 1 \text{ et } {[(a_1, a_2)]}_n \in \overline{\mathfrak{J}}
+    \end{align*}
+\end{corollary}
+
+\begin{proof} D'après les proposition précédentes
+    \begin{itemize}
+        \item ($\impliedby$) Si $a_3 = \cdots = a_m = 1 \text{ et } {[(a_1, a_2)]}_n \in \overline{\mathfrak{J}}$
+        
+            Comme ${[(a_1, a_2)]}_n \in \overline{\mathfrak{J}}$, on a $[a] \in \overline{\mathfrak{J}}$ (par ajout de poids à 1)
+        \item ($\implies$) Si $[a] \in \overline{\mathfrak{J}}$
+
+            Alors $a = (a_1, a_2, 1, \dots, 1)$  (par la conjecture)
+
+            Et $[(a_1, a_2)] \in \overline{\mathfrak{J}}$ (par retrait de poids)
+    \end{itemize}
+\end{proof}
 
 \begin{conjecture}
-    Soit $a=(a_0, a_1, a_2)$ un éclatement d'une singularité $[a]$
-
-    Alors $[a]$ est de type $\mathfrak{J}$ $\implies \exists p, q: a_0 = p*a_1 + q*a_2$
-\end{conjecture}
-
-\begin{conjecture}
-    (strict) Soit $[a] = ([a_1], \dots, [a_m]) \in \mathfrak{J}, m \geq 2$
-
-    Alors $|\{ a_i \in [a] \mid a_i == 1 \} \geq m - 2$
-\end{conjecture}
-
-\begin{conjecture}
-    Si $[a] \in \mathfrak{J}$, alors son représentant naturel $a \in [a]$ offre une suite d'éclatement montrant $[a] \in \mathfrak{J}$
+    Si $[a] \in \overline{\mathfrak{J}}$, alors $[a] \in \mathfrak{J}$, donc $\mathfrak{J} = \overline{\mathfrak{J}}$
 \end{conjecture}
 
 
