@@ -126,39 +126,45 @@ Si $\forall i \neq j : n_i \perp n_j$, alors $\exists!x \in \mathbb{Z}_n$ tel qu
     x &\equiv a_m \pmod {n_m}
 \end{align*}
 
+\newpage
 
 \subsection{Résultats connus}
 Résultats utiles, dûs à Habib Jaber.
 
 \begin{proposition}
-    Soit $a_1, a_2 \in \mathbb{Z},\; \gcd(a_1, a_2) = 1$, alors
-    \[ {[(a_1, a_2)]}_{a_1+a_2} \in \mathfrak{J} \]
+    Soit $a, b \in \mathbb{Z}$
+    \[ a \perp b \implies {[(a, b)]}_{a + b} \in \overline{\mathfrak{J}} \]
 \end{proposition}
 
 \begin{example}
-    $\gcd(2, 1) = 1 \implies {[(2, 1)]}_3 \in \mathfrak{J}$
+    $13 \perp 8 \implies {[(13, 8)]}_{21} \in \overline{\mathfrak{J}}$
 \end{example}
+\begin{figure}[h]
+    \caption{illustration avec la suite de Fibonacci}
+    \centering
+    \includegraphics[width=\textwidth]{fibo}
+\end{figure}
 
 \begin{proposition}
+    Soit $a, b \in \mathbb{Z}$
     \[ 
-    {[(a_1, a_2)]}_n \in \mathfrak{J} \iff 
-    \forall k \in \mathbb{Z}: {[(a_1, a_2)]}_{n+ka_1a_2} \in \mathfrak{J} 
+        {[(a, b)]}_n \in \overline{\mathfrak{J}} \implies
+        \forall k \in \mathbb{Z}^*: {[(a, b)]}_{n+kab} \in \overline{\mathfrak{J}}
     \]
 \end{proposition}
 
 \begin{example}
-    ${[(2, 1)]}_3 \in \mathfrak{J} \implies {[(2, 1)]}_5 \in \mathfrak{J},\; {[(2, 1)]}_7 \in \mathfrak{J}, \dots$
+    ${[(3, 2)]}_5 \in \overline{\mathfrak{J}} \implies {[(3, 2)]}_{11} \in \overline{\mathfrak{J}}$
 \end{example}
 
-\newpage
-
-Illustration de la propoision 1 avec 3 termes consécutifs de la suite de Fibonacci
-
 \begin{figure}[h]
-    \caption{${[(8, 5)]}_{13} \in \mathfrak{J}$}
+    \caption{${[(3, 2)]}_5 \cong {[(3, 2)]}_{11}$}
     \centering
-    \includegraphics[width=0.8\textwidth]{fibo}
+    \includegraphics[width=0.3\textwidth]{532}
+    \includegraphics[width=0.3\textwidth]{11_3_2}
 \end{figure}
+
+\newpage
 
 \section{Propositions}
 
@@ -179,10 +185,11 @@ Soit $m, n \in \mathbb{N}$ tels que $m > 2$, et une singularité $[a] = ([a_1], 
 
     Il suffit de prendre $b_1 = a_1$ et $\forall i = 2..m$, un $b_i$ vérifiant
     \begin{align*}
-        b_i & \equiv a_i \pmod n \\
-        b_i & \equiv 1 \pmod {b_1} \\
-            & \vdotswithin{\equiv} \\
-        b_i & \equiv 1 \pmod {b_{i-1}} 
+        b_2 & \equiv a_2 \pmod n   & b_3 & \equiv a_3 \pmod n   & b_i & \equiv a_i \pmod n \\
+        b_2 & \equiv 1 \pmod {b_1} & b_3 & \equiv 1 \pmod {b_1} & b_i & \equiv 1 \pmod {b_1} \\
+            &                      & b_3 & \equiv 1 \pmod {b_2} & b_i & \equiv 1 \pmod {b_2} \\
+            &                      &     &                      &     & \vdotswithin{\equiv} \\
+            &                      &     &                      & b_i & \equiv 1 \pmod {b_{i-1}}
     \end{align*}
 
     De tels $b_i$ existent par le théorème des restes chinois
@@ -206,26 +213,24 @@ Soit $\sigma \in Sym(m)$, $\pi_{\sigma} \in Sym(S_n^m)$,
 
 \begin{proposition}
     Le réarrangement des poids préserve le type $\mathfrak{J}$
-
-    Notons $[b] = \pi_{\sigma}([a])$
-    \[ [a] \in \mathfrak{J} \implies [b] \in \mathfrak{J} \]
+    \[ [a] \in \mathfrak{J} \implies \pi_{\sigma}([a]) \in \mathfrak{J} \]
 \end{proposition}
 
 \begin{proof}
-    Il suffit d'observer que $E_a \cong E_b$
+    Il suffit d'observer que $E_a \cong E_{\pi_{\sigma}([a])}$
 \end{proof}
 
 \begin{figure}[h]
-    \caption{${[(3, 2)]}_5 \cong {[(2, 3)]}_5$}
+    \caption{${[(a, b)]}_n \cong {[(b, a)]}_n$}
     \centering
-    \includegraphics[width=0.3\textwidth]{532}
-    \includegraphics[width=0.3\textwidth]{523}
+    \includegraphics[width=0.3\textwidth]{abn}
+    \includegraphics[width=0.3\textwidth]{ban}
 \end{figure}
 
 \subsubsection{Ajout de poids}
 
 \begin{proposition}
-    L'ajout de poids congrus à 1 modulo n préserve le type $\mathfrak{J}$
+    L'ajout de poids de valeur 1 préserve le type $\mathfrak{J}$
 
     Notons $[b] = ([a_1], \dots, [a_m], [1]) \in S_n^{m+1}$
     \begin{align*}
@@ -238,10 +243,10 @@ Soit $\sigma \in Sym(m)$, $\pi_{\sigma} \in Sym(S_n^m)$,
 \end{proof}
 
 \begin{figure}[h]
-    \caption{${[(3, 2)]}_5 \cong {[(3, 2, 1)]}_5$}
+    \caption{${[(a, b)]}_n \cong {[(a, b, 1)]}_n$}
     \centering
-    \includegraphics[width=0.3\textwidth]{532}
-    \includegraphics[width=0.3\textwidth]{5321}
+    \includegraphics[width=0.3\textwidth]{abn}
+    \includegraphics[width=0.3\textwidth]{ab1n}
 \end{figure}
 
 \subsubsection{Retrait de poids}
