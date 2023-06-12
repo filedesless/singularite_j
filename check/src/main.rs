@@ -16,7 +16,7 @@ fn is_jstrict(n: i32, a: i32, b: i32) -> bool {
     }
 
     if !(coprime(a, b) && coprime(a, n) && coprime(b, n)) {
-        return false
+        return false;
     }
 
     if n == a + b {

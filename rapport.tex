@@ -335,25 +335,25 @@ Soit $\sigma \in Sym(m)$, $\pi_{\sigma} \in Sym(S_n^m)$,
     ${(b, c)}_a \in \overline{\mathfrak{J}}$ et ${(a_b, c)}_b \in \overline{\mathfrak{J}}$ contradiction?
 \end{proof}
 
-\begin{proof}
-    Supposons par contraposée $|E_a| > 2$ ($\star$)
+% \begin{proof}
+%     Supposons par contraposée $|E_a| > 2$ ($\star$)
 
-    Donc, sans perdre de généralité, $\exists k \in \{3,\dots,m\} : a_1 > \cdots > a_k > 1$
+%     Donc, sans perdre de généralité, $\exists k \in \{3,\dots,m\} : a_1 > \cdots > a_k > 1$
 
-    On a donc les singularités $[a^1], \dots, [a^k] \in E_a$ d'éclatements naturels $a^1, \dots, a^k$
+%     On a donc les singularités $[a^1], \dots, [a^k] \in E_a$ d'éclatements naturels $a^1, \dots, a^k$
 
-    Si $\exists i \in \{1,\dots,k\} : |E_{a^i}| > 2$, on répète le raisonnement avec (par ($\star$))
+%     Si $\exists i \in \{1,\dots,k\} : |E_{a^i}| > 2$, on répète le raisonnement avec (par ($\star$))
 
-    Supposons donc $\forall i \in \{1,\dots,k\} : |E_{a^i}| \leq 2$
+%     Supposons donc $\forall i \in \{1,\dots,k\} : |E_{a^i}| \leq 2$
 
-    Considérons $a^1 = (a^1_1, \dots, a^1_m)$
+%     Considérons $a^1 = (a^1_1, \dots, a^1_m)$
 
-    Puisque $a_1 > a_2 > a_3 > 1$, on a $a^1_2 > a^1_3 > 1$
+%     Puisque $a_1 > a_2 > a_3 > 1$, on a $a^1_2 > a^1_3 > 1$
 
-    Forcément $|E_{a^1}| = 2$ et $(-n \mod {a_1}) = 1$
+%     Forcément $|E_{a^1}| = 2$ et $(-n \mod {a_1}) = 1$
 
-    $\cdots$
-\end{proof}
+%     $\cdots$
+% \end{proof}
 
 \begin{figure}[h]
     \caption{Singularités $s \in S_{13}^3$ telles que $s \in \overline{\mathfrak{J}}$}
@@ -382,6 +382,24 @@ Soit $\sigma \in Sym(m)$, $\pi_{\sigma} \in Sym(S_n^m)$,
             Et $[(a_1, a_2)] \in \overline{\mathfrak{J}}$ (par retrait de poids)
     \end{itemize}
 \end{proof}
+
+\newpage
+
+
+\begin{conjecture}
+    Soit $n > a > b > 1$, alors
+    \[ {[(a, b)]}_n \in \overline{\mathfrak{J}} \implies {[(n-a, b)]}_n \not \in \overline{\mathfrak{J}} \]
+\end{conjecture}
+
+\begin{corollary}
+    Soit $n > a > b > 1$, alors
+    \[ {[(a, b)]}_n \in \overline{\mathfrak{J}} \implies {[(n, b)]}_a \not \in \overline{\mathfrak{J}} \]
+\end{corollary}
+
+\begin{corollary}
+    Soit $n > a > b > c > 1$, alors
+    \[ {[(a, b, c)]}_n \not \in \overline{\mathfrak{J}} \]
+\end{corollary}
 
 \begin{conjecture}
     Si $[a] \in \overline{\mathfrak{J}}$, alors $[a] \in \mathfrak{J}$, donc $\mathfrak{J} = \overline{\mathfrak{J}}$

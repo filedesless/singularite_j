@@ -43,17 +43,23 @@ def isJStrict(n, xs):
     if len(xs) == 1:
         return coprime(n, xs[0]) # ex 8
     if len(xs) == 2:
-        if n == sum(xs):  # habib 1
+        if pairwise_coprime((n, *xs)) and n == sum(xs):  # habib 1
             return True
         if n < sum(xs):  # triangle
             return False
-    return isJStrict_(n % prod(xs), xs) # habib 2
+    ans = isJStrict_(n % prod(xs), xs) # habib 2
+    if ans and len(xs) == 2:
+        b, a = xs
+        # print(n, xs)
+        assert not isJStrict(a, (n%a, b))
+    return ans
 
 
 assert isJStrict(2, (1, 1, 1))
 assert isJStrict(3, (1, 2, 1))
 assert isJStrict(5, (3, 2, 1))
 assert not isJStrict(5, (4, 3))
+assert not isJStrict(6, (4, 2))
 
 @cache
 def fib(n):
