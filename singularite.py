@@ -47,12 +47,7 @@ def isJStrict(n, xs):
             return True
         if n < sum(xs):  # triangle
             return False
-    ans = isJStrict_(n % prod(xs), xs) # habib 2
-    if ans and len(xs) == 2:
-        b, a = xs
-        # print(n, xs)
-        assert not isJStrict(a, (n%a, b))
-    return ans
+    return isJStrict_(n % prod(xs), xs) # habib 2
 
 
 assert isJStrict(2, (1, 1, 1))

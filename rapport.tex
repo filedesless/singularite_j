@@ -9,9 +9,9 @@
 \usepackage{hyperref}
 \usepackage[a4paper]{geometry}
 
-\title{Caractérisation des singularités de type $\mathfrak{J}$}
+\title{Caractérisation des singularités de type $\J$}
 \author{Félix Larose-Gervais}
-\date{Mai 2023}
+\date{Été 2023}
 
 \newtheorem{definition}{Définition}
 \newtheorem{proposition}{Proposition}
@@ -19,6 +19,9 @@
 \newtheorem{example}{Exemple}
 \newtheorem{corollary}{Corollaire}
 \renewcommand*{\proofname}{Preuve}
+
+\newcommand{\J}{\mathfrak{J}}
+\newcommand{\JS}{\overline{\J}}
 
 \begin{document}
 
@@ -38,8 +41,7 @@ Soit $a, b \in \mathbb{Z}$ on note la relation de coprimalité $\perp$
 Soit $m, n \in \mathbb{N}$, $X$ un ensemble, notons 
 
 \begin{itemize}
-    \item $Sym(X)$ le groupe de bijections de $X$ dans lui-même
-    \item $Sym(m)$ le groupe de bijections $Sym(\{1, \dots, m \})$ 
+    \item $S_m$ le groupe symmétrique à $m$ lettres
     \item $\mathbb{Z}_n$ l'anneau des entiers modulo n ($\mathbb{Z}/n\mathbb{Z}$)
     \item $\mathbb{Z}_n^\times$ son groupe d'inversibles ($\{ a \in \mathbb{Z}_n \mid a \perp n \})$
     \item $X^m$ l'ensemble des m-uplets de $X$ $(\underbrace{X \times \cdots \times X}_{m fois})$
@@ -79,14 +81,14 @@ On notera aussi $S_n^m$ l'ensemble des m-uplets d'inversibles modulo n $({({\mat
 \end{definition}
 
 \begin{definition}
-    La singularité $[a]$ est dite de \textbf{type $\mathfrak{J}$} (noté $[a] \in \mathfrak{J}$) ssi
+    La singularité $[a]$ est dite de \textbf{type $\J$} (noté $[a] \in \J$) ssi
     \begin{align*}
-        \exists a \in [a] : \forall [a^i] \in E_a : [a^i] \in \mathfrak{J}
+        \exists a \in [a] : \forall [a^i] \in E_a : [a^i] \in \J
     \end{align*}
-    On parlera de \textbf{type $\mathfrak{J}$ strict} (noté $[a] \in \overline{\mathfrak{J}}$) lorsque 
+    On parlera de \textbf{type $\J$ strict} (noté $[a] \in \JS$) lorsque 
     pour $a \in [a]$ l'éclatement naturel de $[a]$ on a
     \begin{align*}
-        \forall [a^i] \in E_a : [a^i] \in \overline{\mathfrak{J}}
+        \forall [a^i] \in E_a : [a^i] \in \JS
     \end{align*}
 \end{definition}
 
@@ -133,14 +135,14 @@ Résultats utiles, dûs à Habib Jaber.
 
 \begin{proposition}
     Soit $a, b \in \mathbb{Z}$
-    \[ a \perp b \implies {[(a, b)]}_{a + b} \in \overline{\mathfrak{J}} \]
+    \[ a \perp b \implies {[(a, b)]}_{a + b} \in \JS \]
 \end{proposition}
 
 \begin{example}
-    $13 \perp 8 \implies {[(13, 8)]}_{21} \in \overline{\mathfrak{J}}$
+    $13 \perp 8 \implies {[(13, 8)]}_{21} \in \JS$
 \end{example}
 \begin{figure}[h]
-    \caption{illustration avec la suite de Fibonacci}
+    \caption{Illustration avec la suite de Fibonacci}
     \centering
     \includegraphics[width=\textwidth]{fibo}
 \end{figure}
@@ -148,13 +150,13 @@ Résultats utiles, dûs à Habib Jaber.
 \begin{proposition}
     Soit $a, b \in \mathbb{Z}$
     \[ 
-        {[(a, b)]}_n \in \overline{\mathfrak{J}} \implies
-        \forall k \in \mathbb{Z}^*: {[(a, b)]}_{n+kab} \in \overline{\mathfrak{J}}
+        {[(a, b)]}_n \in \JS \implies
+        \forall k \in \mathbb{Z}^*: {[(a, b)]}_{n+kab} \in \JS
     \]
 \end{proposition}
 
 \begin{example}
-    ${[(3, 2)]}_5 \in \overline{\mathfrak{J}} \implies {[(3, 2)]}_{11} \in \overline{\mathfrak{J}}$
+    ${[(3, 2)]}_5 \in \JS \implies {[(3, 2)]}_{11} \in \JS$
 \end{example}
 
 \begin{figure}[h]
@@ -168,7 +170,7 @@ Résultats utiles, dûs à Habib Jaber.
 
 \section{Propositions}
 
-Soit $m, n \in \mathbb{N}$ tels que $m > 2$, et une singularité $[a] = ([a_1], \dots, [a_m]) \in S_n^m$
+Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([a_1], \dots, [a_m])}_n \in S_n^m$
 
 \subsection{Existence d'un éclatement}
 
@@ -177,9 +179,7 @@ Soit $m, n \in \mathbb{N}$ tels que $m > 2$, et une singularité $[a] = ([a_1], 
 \end{proposition}
 
 \begin{proof}
-    Soit $[a] = ([a_1], \dots, [a_m]) \in S_n^m$
-
-    Prenons $(a_1, \dots, a_m) \in [a]$ son représentant naturel
+    Prenons $(a_1, \dots, a_m) \in [a]$ le représentant naturel de $[a]$
 
     On cherche $(b_1, \dots, b_m) \in [a]$ tels que $\forall i \neq j : b_i \perp b_j$ et $\forall i : b_i \perp n$
 
@@ -202,81 +202,75 @@ Soit $m, n \in \mathbb{N}$ tels que $m > 2$, et une singularité $[a] = ([a_1], 
     On a donc $b = (b_1, \dots, b_m)$ un éclatement de $[a]$
 \end{proof}
 
-\subsection{Invariants}
+\subsection{Propriétés}
 
-\subsubsection{Ordre des poids}
+\subsubsection{Symmétrie}
 
 \begin{proposition}
-    Le réarrangement des poids préserve le type $\mathfrak{J}$
-
-    Soit $\pi \in Sym(S_n^m)$, on a
-    \[ [a] \in \mathfrak{J} \implies \pi([a]) \in \mathfrak{J} \]
+    Le réarrangement des poids préserve le type $\J$. Soit $\sigma \in S_m$, on a
+    \[ [a] \in \J \implies \sigma([a]) \in \J \]
 \end{proposition}
 
 \begin{proof}
-    Il suffit d'observer que $E_a \cong E_{\pi([a])}$
+    Prenons $a \in [a]$ tel que $E_a \subset \J$
+
+    Il suffit d'observer que $E_a \cong E_{\sigma(a)}$
 \end{proof}
 
 \begin{figure}[h]
-    \caption{${[(a, b)]}_n \cong {[(b, a)]}_n$}
+    \caption{Illustration avec $a = (a_1, a_2)$, $\sigma = (12)$}
     \centering
-    \includegraphics[width=0.3\textwidth]{abn}
-    \includegraphics[width=0.3\textwidth]{ban}
+    \includegraphics[width=0.4\textwidth]{abn}
+    \includegraphics[width=0.4\textwidth]{ban}
 \end{figure}
 
 \subsubsection{Ajout de poids}
 
 \begin{proposition}
-    L'ajout de poids de valeur 1 préserve le type $\mathfrak{J}$
-
-    Notons $[b] = ([a_1], \dots, [a_m], [1]) \in S_n^{m+1}$
-    \begin{align*}
-        [a] \in \mathfrak{J} \implies [b] \in \mathfrak{J}
-    \end{align*}
+    L'ajout de poids de valeur 1 préserve le type $\J$
+    \[ {([a_1], \dots, [a_m])}_n \in \J \implies {([a_1], \dots, [a_m], [1])}_n \in \J \]
 \end{proposition}
 
 \begin{proof}
+    Prenons $a \in [a]$ tel que $E_a \subset \J$, $b = (a_1, \dots, a_m, 1)$
+
     Il suffit d'observer que $E_a \cong E_b$
 \end{proof}
 
 \begin{figure}[h]
-    \caption{${[(a, b)]}_n \cong {[(a, b, 1)]}_n$}
+    \caption{Illustration avec $a = (a_1, a_2)$}
     \centering
-    \includegraphics[width=0.3\textwidth]{abn}
-    \includegraphics[width=0.3\textwidth]{ab1n}
+    \includegraphics[width=0.4\textwidth]{abn}
+    \includegraphics[width=0.4\textwidth]{ab1n}
 \end{figure}
 
 \subsubsection{Retrait de poids}
 
 \begin{proposition}
-    Le retrait de poids préserve le type $\mathfrak{J}$
+    Le retrait de poids préserve le type $\J$
     \begin{align*}
-        {([a_1], \dots, [a_m])}_n \in \mathfrak{J} \implies {([a_1], \dots, [a_{m-1}])}_n \in \mathfrak{J}
+        {([a_1], \dots, [a_m])}_n \in \J \implies {([a_1], \dots, [a_{m-1}])}_n \in \J
     \end{align*}
 \end{proposition}
 
 \begin{proof}
-    Notons $[a] = {([a_1], \dots, [a_m])}_n$
-    
-    Supposons $[a] \in \mathfrak{J}$, donc $\forall [b] \in E_a : [b] \in \mathfrak{J}$
+    Prenons $a \in [a]$ tel que $E_a \subset \J$
 
     La preuve se fait par induction structurelle
 
-    D'abord, on observe ${([1], \dots, [1])}_n \in \mathfrak{J}$
+    D'abord, on observe ${([1], \dots, [1])}_n \in \J$
 
-    Puis on suppose que $\forall [b] \in E_a : [b] \in \mathfrak{J} \implies {([b_1], \dots, [b_{m-1}])}_n \in \mathfrak{J}$
+    Puis on suppose que $\forall [b] \in E_a : [b] \in \J \implies {([b_1], \dots, [b_{m-1}])}_n \in \J$
 
-    On en conclut ${([a_1], \dots, [a_{m-1}])}_n \in \mathfrak{J}$
+    On en conclut ${([a_1], \dots, [a_{m-1}])}_n \in \J$
 
 \end{proof}
 
-Illustration pour $m = 3$
-
 \begin{figure}[h]
-    \caption{${[(a, b, c)]}_n \twoheadrightarrow{} {[(a, b)]}_n$}
+    \caption{Illustration pour $m = 3$}
     \centering
-    \includegraphics[width=0.3\textwidth]{abcn}
-    \includegraphics[width=0.3\textwidth]{abn}
+    \includegraphics[width=0.4\textwidth]{abcn}
+    \includegraphics[width=0.4\textwidth]{abn}
 \end{figure}
 
 \newpage
@@ -284,8 +278,8 @@ Illustration pour $m = 3$
 \subsection{Caractérisation stricte}
 
 \begin{proposition}
-    Soit $[a] \in S_n^2$, d'éclatement naturel $a = (a_1, a_2) \in \mathbb{Z}^2$
-    \[ [a] \in \overline{\mathfrak{J}} \implies n \geq a_1 + a_2 \]
+    Soit $[a] \in S_n^2$, d'éclatement naturel $a = (a_1, a_2) \in [a]$
+    \[ [a] \in \JS \implies n \geq a_1 + a_2 \]
 \end{proposition} 
 
 \begin{proof}
@@ -294,7 +288,7 @@ Illustration pour $m = 3$
     \begin{itemize}
         \item Si $a_1 = a_2$ ($\neq 1$ par ($\star$))
 
-            Alors $[a] \not \in \overline{\mathfrak{J}}$
+            Alors $[a] \not \in \JS$
         \item Sinon, $a_1 \neq a_2$, supposons sans perdre de généralité que $a_1 > a_2$
 
             Considérons $a^1$ l'éclatement naturel de $[a^1] \in E_a$ la singularité associée à $a_1$
@@ -318,11 +312,11 @@ Illustration pour $m = 3$
 \end{proof}
 
 \begin{example}
-    ${[4, 3]}_5 \not \in \overline{\mathfrak{J}}$ car $5 < 4 + 3$
+    ${(4, 3)}_5 \not \in \JS$ car $5 < 4 + 3$
 \end{example}
 
 \begin{figure}[h]
-    \caption{Singularités $s \in S_{32}^2$ telles que $s \in \overline{\mathfrak{J}}$}
+    \caption{Singularités $s \in S_{32}^2$ telles que $s \in \JS$}
     \centering
     \includegraphics[width=0.7\textwidth]{singularite_j_strict_m2_n32}
 \end{figure}
@@ -334,7 +328,7 @@ Illustration pour $m = 3$
 \begin{conjecture}
     Soit $[a] \in S_n^m$ de représentant naturel $a = (a_1, \dots, a_m) \in \mathbb{Z}^m$
     \begin{align*}
-        [a] \in \overline{\mathfrak{J}} \implies |E_a| \leq 2
+        [a] \in \JS \implies |E_a| \leq 2
     \end{align*}
 \end{conjecture}
 
@@ -347,31 +341,11 @@ Illustration pour $m = 3$
 
     $\cdots$ donc avec $a > b > c > 1$ copremiers deux-à-deux
 
-    ${(b, c)}_a \in \overline{\mathfrak{J}}$ et ${(a_b, c)}_b \in \overline{\mathfrak{J}}$ contradiction?
+    ${(b, c)}_a \in \JS$ et ${(a_b, c)}_b \in \JS$ contradiction?
 \end{proof}
 
-% \begin{proof}
-%     Supposons par contraposée $|E_a| > 2$ ($\star$)
-
-%     Donc, sans perdre de généralité, $\exists k \in \{3,\dots,m\} : a_1 > \cdots > a_k > 1$
-
-%     On a donc les singularités $[a^1], \dots, [a^k] \in E_a$ d'éclatements naturels $a^1, \dots, a^k$
-
-%     Si $\exists i \in \{1,\dots,k\} : |E_{a^i}| > 2$, on répète le raisonnement avec (par ($\star$))
-
-%     Supposons donc $\forall i \in \{1,\dots,k\} : |E_{a^i}| \leq 2$
-
-%     Considérons $a^1 = (a^1_1, \dots, a^1_m)$
-
-%     Puisque $a_1 > a_2 > a_3 > 1$, on a $a^1_2 > a^1_3 > 1$
-
-%     Forcément $|E_{a^1}| = 2$ et $(-n \mod {a_1}) = 1$
-
-%     $\cdots$
-% \end{proof}
-
 \begin{figure}[h]
-    \caption{Singularités $s \in S_{13}^3$ telles que $s \in \overline{\mathfrak{J}}$}
+    \caption{Singularités $s \in S_{13}^3$ telles que $s \in \JS$}
     \centering
     \includegraphics[width=0.6\textwidth]{singularite_j_strict_m3_n13}
 \end{figure}
@@ -381,43 +355,42 @@ Illustration pour $m = 3$
 
     Supposons sans perdre de généralité que $a_1 > a_2 > \cdots > a_m$, alors
     \begin{align*}
-        [a] \in \overline{\mathfrak{J}} \iff a_3 = \cdots = a_m = 1 \text{ et } {[(a_1, a_2)]}_n \in \overline{\mathfrak{J}}
+        [a] \in \JS \iff a_3 = \cdots = a_m = 1 \text{ et } {[(a_1, a_2)]}_n \in \JS
     \end{align*}
 \end{corollary}
 
 \begin{proof} D'après les proposition précédentes
     \begin{itemize}
-        \item ($\impliedby$) Si $a_3 = \cdots = a_m = 1 \text{ et } {[(a_1, a_2)]}_n \in \overline{\mathfrak{J}}$
+        \item ($\impliedby$) Si $a_3 = \cdots = a_m = 1 \text{ et } {[(a_1, a_2)]}_n \in \JS$
         
-            Comme ${[(a_1, a_2)]}_n \in \overline{\mathfrak{J}}$, on a $[a] \in \overline{\mathfrak{J}}$ (par ajout de poids à 1)
-        \item ($\implies$) Si $[a] \in \overline{\mathfrak{J}}$
+            Comme ${[(a_1, a_2)]}_n \in \JS$, on a $[a] \in \JS$ (par ajout de poids à 1)
+        \item ($\implies$) Si $[a] \in \JS$
 
             Alors $a = (a_1, a_2, 1, \dots, 1)$  (par la conjecture)
 
-            Et $[(a_1, a_2)] \in \overline{\mathfrak{J}}$ (par retrait de poids)
+            Et $[(a_1, a_2)] \in \JS$ (par retrait de poids)
     \end{itemize}
 \end{proof}
 
 \newpage
 
-
 \begin{conjecture}
     Soit $n > a > b > 1$, alors
-    \[ {[(a, b)]}_n \in \overline{\mathfrak{J}} \implies {[(n-a, b)]}_n \not \in \overline{\mathfrak{J}} \]
+    \[ {[(a, b)]}_n \in \JS \implies {[(n-a, b)]}_n \not \in \JS \]
 \end{conjecture}
 
 \begin{corollary}
     Soit $n > a > b > 1$, alors
-    \[ {[(a, b)]}_n \in \overline{\mathfrak{J}} \implies {[(n, b)]}_a \not \in \overline{\mathfrak{J}} \]
+    \[ {[(a, b)]}_n \in \JS \implies {[(n, b)]}_a \not \in \JS \]
 \end{corollary}
 
 \begin{corollary}
     Soit $n > a > b > c > 1$, alors
-    \[ {[(a, b, c)]}_n \not \in \overline{\mathfrak{J}} \]
+    \[ {[(a, b, c)]}_n \not \in \JS \]
 \end{corollary}
 
 \begin{conjecture}
-    Si $[a] \in \overline{\mathfrak{J}}$, alors $[a] \in \mathfrak{J}$, donc $\mathfrak{J} = \overline{\mathfrak{J}}$
+    Si $[a] \in \JS$, alors $[a] \in \J$, donc $\J = \JS$
 \end{conjecture}
 
 
