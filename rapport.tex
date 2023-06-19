@@ -185,39 +185,36 @@ Soit $m, n \in \mathbb{N}$ tels que $m > 2$, et une singularité $[a] = ([a_1], 
 
     Il suffit de prendre $b_1 = a_1$ et $\forall i = 2..m$, un $b_i$ vérifiant
     \begin{align*}
-        b_2 & \equiv a_2 \pmod n   & b_3 & \equiv a_3 \pmod n   & b_i & \equiv a_i \pmod n \\
-        b_2 & \equiv 1 \pmod {b_1} & b_3 & \equiv 1 \pmod {b_1} & b_i & \equiv 1 \pmod {b_1} \\
-            &                      & b_3 & \equiv 1 \pmod {b_2} & b_i & \equiv 1 \pmod {b_2} \\
-            &                      &     &                      &     & \vdotswithin{\equiv} \\
-            &                      &     &                      & b_i & \equiv 1 \pmod {b_{i-1}}
+        b_i & \equiv a_i \pmod n \\
+        b_i & \equiv 1 \pmod {b_1} \\
+            & \vdotswithin{\equiv} \\
+        b_i & \equiv 1 \pmod {b_{i-1}}
     \end{align*}
 
     De tels $b_i$ existent par le théorème des restes chinois
 
     On vérifie les coprimalités nécéssaires grâce aux propriétés de $\gcd$
+    
+    \hspace{\parindent} On a par la première congruence $\forall i : b_i \perp n$ (puisque $\forall i : a_i \perp n$)
 
-    On a par la première congruence $\forall i : b_i \perp n$ (puisque $\forall i : a_i \perp n$)
-
-    Et par les suivantes $\forall i \neq j : b_i \perp b_j$
+    \hspace{\parindent} Et par les suivantes $\forall i \neq j : b_i \perp b_j$
 
     On a donc $b = (b_1, \dots, b_m)$ un éclatement de $[a]$
 \end{proof}
-
-\newpage
 
 \subsection{Invariants}
 
 \subsubsection{Ordre des poids}
 
-Soit $\sigma \in Sym(m)$, $\pi_{\sigma} \in Sym(S_n^m)$, 
-
 \begin{proposition}
     Le réarrangement des poids préserve le type $\mathfrak{J}$
-    \[ [a] \in \mathfrak{J} \implies \pi_{\sigma}([a]) \in \mathfrak{J} \]
+
+    Soit $\pi \in Sym(S_n^m)$, on a
+    \[ [a] \in \mathfrak{J} \implies \pi([a]) \in \mathfrak{J} \]
 \end{proposition}
 
 \begin{proof}
-    Il suffit d'observer que $E_a \cong E_{\pi_{\sigma}([a])}$
+    Il suffit d'observer que $E_a \cong E_{\pi([a])}$
 \end{proof}
 
 \begin{figure}[h]
@@ -253,16 +250,34 @@ Soit $\sigma \in Sym(m)$, $\pi_{\sigma} \in Sym(S_n^m)$,
 
 \begin{proposition}
     Le retrait de poids préserve le type $\mathfrak{J}$
-
-    Notons $[b] = ([a_1], \dots, [a_{m-1}]) \in S_n^{m-1}$
     \begin{align*}
-        [a] \in \mathfrak{J} \implies [b] \in \mathfrak{J}
+        {([a_1], \dots, [a_m])}_n \in \mathfrak{J} \implies {([a_1], \dots, [a_{m-1}])}_n \in \mathfrak{J}
     \end{align*}
 \end{proposition}
 
 \begin{proof}
-    TODO
+    Notons $[a] = {([a_1], \dots, [a_m])}_n$
+    
+    Supposons $[a] \in \mathfrak{J}$, donc $\forall [b] \in E_a : [b] \in \mathfrak{J}$
+
+    La preuve se fait par induction structurelle
+
+    D'abord, on observe ${([1], \dots, [1])}_n \in \mathfrak{J}$
+
+    Puis on suppose que $\forall [b] \in E_a : [b] \in \mathfrak{J} \implies {([b_1], \dots, [b_{m-1}])}_n \in \mathfrak{J}$
+
+    On en conclut ${([a_1], \dots, [a_{m-1}])}_n \in \mathfrak{J}$
+
 \end{proof}
+
+Illustration pour $m = 3$
+
+\begin{figure}[h]
+    \caption{${[(a, b, c)]}_n \twoheadrightarrow{} {[(a, b)]}_n$}
+    \centering
+    \includegraphics[width=0.3\textwidth]{abcn}
+    \includegraphics[width=0.3\textwidth]{abn}
+\end{figure}
 
 \newpage
 

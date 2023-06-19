@@ -59,7 +59,8 @@ fn main() {
         for a in 3..n {
             for b in 2..a {
                 if is_jstrict(n, a, b) {
-                    assert!(!is_jstrict(a, n.rem_euclid(a), b))
+                    assert!(!is_jstrict(a, n.rem_euclid(a), b));
+                    assert!(!is_jstrict(n, n - a, b));
                 }
             }
         }
