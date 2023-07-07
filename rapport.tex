@@ -128,6 +128,20 @@ Si $\forall i \neq j : n_i \perp n_j$, alors $\exists!x \in \mathbb{Z}_n$ tel qu
     x &\equiv a_m \pmod {n_m}
 \end{align*}
 
+Cette solution, pour $m = 2$ est obtenue comme suit
+\begin{align*}
+    x \equiv a_1 \pmod {n_1} \\
+    x \equiv a_2 \pmod {n_2}
+\end{align*}
+
+Puisque $n_1 \perp n_2$, on a $s, t \in \mathbb{Z}$ tels que $1 = sn_1 + tn_2$
+
+Et donc $x = a_1tn_2 + a_2sn_1$ est l'unique solution $\pmod {n_1n_2}$
+
+Cette méthode nous laisse $m - 1$ équations dans le système
+
+Il suffit d'itérer le processus jusqu'à ce qu'il n'est reste qu'une pour $m > 2$
+
 \newpage
 
 \subsection{Résultats connus}
@@ -274,6 +288,8 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
 
 \subsection{Caractérisation stricte}
 
+\subsubsection{Frontière}
+
 \begin{proposition}
     Soit $[a] \in S_n^2$, d'éclatement naturel $a = (a_1, a_2) \in [a]$
     \[ [a] \in \JS \implies n \geq a_1 + a_2 \]
@@ -315,120 +331,127 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
 \begin{figure}[h]
     \caption{Singularités $s \in S_{32}^2$ telles que $s \in \JS$}
     \centering
-    \includegraphics[width=0.7\textwidth]{singularite_j_strict_m2_n32}
+    \includegraphics[width=0.6\textwidth]{singularite_j_strict_m2_n32}
+\end{figure}
+
+\newpage
+
+\subsubsection{Combinaison linéaire}
+
+\begin{proposition}
+    Soit $a, b, n \in \mathbb{N}_{>1}$, avec $a \perp b$, alors $\exists \alpha, \beta \in \mathbb{Z}_{ab}$ tels que
+    \[ \alpha a + \beta b \equiv n \pmod {ab} \]
+\end{proposition}
+
+\begin{proof}
+    Puisque $a \perp b$, prenons $s, t \in \mathbb{Z}$ tels que $1 = as + bt$ (par Bézout)
+
+    Considérons les systèmes modulaires suivants
+    \begin{align*}
+        x \equiv 0 \pmod a &\quad y \equiv n \pmod a \\
+        x \equiv n \pmod b &\quad y \equiv 0 \pmod b
+    \end{align*}
+
+    Par le Théorème des restes chinois, les uniques solutions sont
+    \begin{align*}
+        x \equiv nas \pmod {ab} \\
+        y \equiv nbt \pmod {ab}
+    \end{align*}
+
+    On a donc (toujours modulo $ab$)
+    \begin{align*}
+        x + y & \equiv nas + nbt \\
+              & \equiv n(as + bt) \\
+              & \equiv n
+    \end{align*}
+
+    Et comme $x \vert a$ et $y \vert b$, prenons $\alpha = \frac{x}{a}$ et $\beta = \frac{y}{b}$, des entiers
+    \begin{align*}
+        n & \equiv x + y \\
+          & \equiv \frac{x}{a}a + \frac{y}{b}b \\
+          & \equiv \alpha a + \beta b
+    \end{align*}
+\end{proof}
+
+\subsubsection{Anti-symmétrie}
+
+\begin{proposition}
+    Soit $[s] \in S_n^2$ d'éclatement naturel $(a, b) \in [s]$, avec $a, b > 1$, alors
+
+    \[ {(a, b)}_n \in \JS \implies {(-a, b)}_n \not \in \JS \]
+\end{proposition}
+
+\begin{proof}
+    Supposons ${(a, b)}_n \in \JS$
+
+    La chaine d'éclatements à gauche successifs de ${(-a, b)}_n$ est, pour $i > 0$, $n - ia > 0$
+    \begin{align*}
+        {(n - ia, b)}_{n-(i-1)a}
+    \end{align*}
+
+    Puisque $a \perp b$, prenons $\alpha, \beta \in \mathbb{Z}_{ab}$ tels que $\alpha a + \beta b \equiv n \pmod {ab}$
+
+    On a que, lorsque $i = \alpha$, $n - ia = n - \alpha a = \beta b$
+
+    Donc $b \vert n - ia$, $b \not \perp n - ia$, ${(n - ia, b)}_n \not \in \JS$ et ${(-a, b)}_n \not \in \JS$
+\end{proof}
+
+\newpage
+
+\subsubsection{Échange racine-poids}
+
+\begin{proposition}
+    Soit $[s] \in S_n^2$ d'éclatement naturel $(a, b) \in [s]$, avec $a, b > 1$, alors
+    
+    \[ {(a, b)}_n \in \JS \implies {(n, b)}_a \not \in \JS \]
+\end{proposition}
+
+\begin{proof}
+    Supposons ${(a, b)}_n \in \JS$
+
+    Donc son éclatement ${(-n, b)}_a \in \JS$
+
+    Par Anti-symmétrie, ${(n, b)}_a \not \in \JS$
+\end{proof}
+
+\subsubsection{Restriction au bord}
+
+\begin{proposition}
+    Soit $[s] \in S_n^3$ d'éclatement naturel $(a, b, c) \in [s]$, avec $a, b, c > 1$, alors
+    
+    \[ {(a, b, c)}_n \not \in \JS \]
+\end{proposition}
+
+\begin{proof}
+    Si ${(a, b, c)}_n \in \JS$, alors ses éclatements ${(-n, b, c)}_a \in \JS$ et ${(a, -n, c)}_b \in \JS$
+
+    Par retrait de poids, ${(b, c)}_a \in \JS$ et ${(a, c)}_b \in \JS$
+
+    Contradiction avec Échange racine-poids
+\end{proof}
+
+\begin{corollary}
+    Pour être de type $\JS$, une singularité ne peut avoir plus de 2 poids supérieurs à 1.
+\end{corollary}
+
+\begin{proof}
+    Si une singularité de type $\JS$ contient les poids $a, b, c > 1$
+    
+    Alors, par retrait de poids ${(a, b, c)}_n \in \JS$, contradiction
+\end{proof}
+
+\begin{example}
+    On observe que les singularités de type $\JS$ de $S_n^3$ sont sur le bord
+\end{example}
+\begin{figure}[h]
+    \caption{Singularités $s \in S_{13}^3$ telles que $s \in \JS$}
+    \centering
+    \includegraphics[width=0.7\textwidth]{singularite_j_strict_m3_n13}
 \end{figure}
 
 \newpage
 
 \section{Conjectures}
-
-\begin{conjecture}
-    Soit $[a] \in S_n^m$ de représentant naturel $a = (a_1, \dots, a_m) \in \mathbb{Z}^m$
-    \begin{align*}
-        [a] \in \JS \implies |E_a| \leq 2
-    \end{align*}
-\end{conjecture}
-
-\begin{proof}
-    Supposons par contraposée $|E_a| > 2$ ($\star$)
-
-    Donc, sans perdre de généralité, on a $a_1 > a_2 > a_3 > 1$
-
-    On a donc les singularités $[a^1], [a^2] \in E_a$ d'éclatements naturels $a^1, a^2$
-
-    $\cdots$ donc avec $a > b > c > 1$ copremiers deux-à-deux
-
-    ${(b, c)}_a \in \JS$ et ${(a_b, c)}_b \in \JS$ contradiction?
-\end{proof}
-
-\begin{figure}[h]
-    \caption{Singularités $s \in S_{13}^3$ telles que $s \in \JS$}
-    \centering
-    \includegraphics[width=0.6\textwidth]{singularite_j_strict_m3_n13}
-\end{figure}
-
-\begin{corollary}
-    Soit la singularite $[a] \in S_n^m$ de représentant naturel $a = (a_1, a_2, \dots, a_m) \in \mathbb{Z}^m$
-
-    Supposons sans perdre de généralité que $a_1 > a_2 > \cdots > a_m$, alors
-    \begin{align*}
-        [a] \in \JS \iff a_3 = \cdots = a_m = 1 \text{ et } {[(a_1, a_2)]}_n \in \JS
-    \end{align*}
-\end{corollary}
-
-\begin{proof} D'après les proposition précédentes
-    \begin{itemize}
-        \item ($\impliedby$) Si $a_3 = \cdots = a_m = 1 \text{ et } {[(a_1, a_2)]}_n \in \JS$
-        
-            Comme ${[(a_1, a_2)]}_n \in \JS$, on a $[a] \in \JS$ (par ajout de poids à 1)
-        \item ($\implies$) Si $[a] \in \JS$
-
-            Alors $a = (a_1, a_2, 1, \dots, 1)$  (par la conjecture)
-
-            Et $[(a_1, a_2)] \in \JS$ (par retrait de poids)
-    \end{itemize}
-\end{proof}
-
-\newpage
-
-\begin{conjecture}
-    Soit ${(a, b)}_n \in \JS$, donc $a \perp b$ et $1 = as + bt$ par Bézout
-
-    Alors \[ (nbt \mod ab) < n \land (nas \mod ab) < n \]
-\end{conjecture}
-
-\begin{corollary}
-    Soit $n > b > 1$, $n > a$ alors
-    \[ {(a, b)}_n \in \JS \implies {(-a, b)}_n \not \in \JS \]
-\end{corollary}
-
-\begin{proof}
-    Supposons ${(a, b)}_n \in \JS$
-
-    On a donc $a \neq b$
-
-    Si $a < b$, alors $n - a + b > n$, donc ${(-a, b)}_n \not \in \JS$
-
-    Sinon, puisque $a > b$, on a $n > a > b > 1$
-
-    Les éclatements à gauche successifs de ${(-a, b)}_n$ sont $-a, -2a, \ldots, n \mod a, \dots$
-
-    Si un tel éclatement est multiple de $b$, alors ${(-a, b)}_n \not \in \JS$
-    \begin{align*}
-        x \equiv n \pmod a \\
-        x \equiv 0 \pmod b
-    \end{align*}
-
-    Un tel $0 < x < n$ existe par la conjecture précédente
-\end{proof}
-
-\begin{corollary}
-    Soit $n > a > b > 1$, alors
-    \[ {(a, b)}_n \in \JS \implies {(n, b)}_a \not \in \JS \]
-\end{corollary}
-
-\begin{proof}
-    Supposons ${(a, b)}_n \in \JS$
-
-    On a donc ${(-n, b)}_a \in \JS$ par éclatement
-
-    Par la conjecture précédente, ${(n, b)}_a \not \in \JS$
-\end{proof}
-
-\begin{corollary}
-    Soit $n > a > b > c > 1$, alors
-    \[ {(a, b, c)}_n \not \in \JS \]
-\end{corollary}
-
-\begin{proof}
-    Supposons ${(a, b, c)}_n \in \JS$
-
-    On a donc ${(-n, b, c)}_a \in \JS$ et ${(a, -n, c)}_b \in \JS$ par éclatement
-
-    Et donc ${(b, c)}_a \in \JS$ et ${(a, c)}_b \in \JS$ par retrait de poids
-
-    Contradiction avec la conjecture précédente
-\end{proof}
 
 \begin{conjecture}
     Si $[a] \in \JS$, alors $[a] \in \J$, donc $\J = \JS$
