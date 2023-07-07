@@ -61,6 +61,18 @@ fn main() {
                 if is_jstrict(n, a, b) {
                     assert!(!is_jstrict(a, n.rem_euclid(a), b));
                     assert!(!is_jstrict(n, n - a, b));
+                    let mut found = false;
+                    let mut x = n;
+                    while x > 0 && !found {
+                        x -= a;
+                        if x % b == 0 {
+                            found = true;
+                        }
+                    }
+                    if !found {
+                        println!("{} {} {}", n, a, b);
+                    }
+
                 }
             }
         }

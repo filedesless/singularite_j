@@ -371,25 +371,64 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
 
 \newpage
 
-\begin{conjecture} (Antisymmétrie) Soit $a > 1$, alors
-    \[ {(a, b)}_n \in \JS \implies {(-a, b)}_n \not \in \JS \]
+\begin{conjecture}
+    Soit ${(a, b)}_n \in \JS$, donc $a \perp b$ et $1 = as + bt$ par Bézout
+
+    Alors \[ (nbt \mod ab) < n \land (nas \mod ab) < n \]
 \end{conjecture}
 
 \begin{corollary}
-    Soit $a > 1$, alors
+    Soit $n > b > 1$, $n > a$ alors
+    \[ {(a, b)}_n \in \JS \implies {(-a, b)}_n \not \in \JS \]
+\end{corollary}
+
+\begin{proof}
+    Supposons ${(a, b)}_n \in \JS$
+
+    On a donc $a \neq b$
+
+    Si $a < b$, alors $n - a + b > n$, donc ${(-a, b)}_n \not \in \JS$
+
+    Sinon, puisque $a > b$, on a $n > a > b > 1$
+
+    Les éclatements à gauche successifs de ${(-a, b)}_n$ sont $-a, -2a, \ldots, n \mod a, \dots$
+
+    Si un tel éclatement est multiple de $b$, alors ${(-a, b)}_n \not \in \JS$
+    \begin{align*}
+        x \equiv n \pmod a \\
+        x \equiv 0 \pmod b
+    \end{align*}
+
+    Un tel $0 < x < n$ existe par la conjecture précédente
+\end{proof}
+
+\begin{corollary}
+    Soit $n > a > b > 1$, alors
     \[ {(a, b)}_n \in \JS \implies {(n, b)}_a \not \in \JS \]
 \end{corollary}
 
 \begin{proof}
-    Si ${(a, b)}_n \in \JS$, alors son éclatement ${(-n, b)}_a \in \JS$ (car $a > 1$)
+    Supposons ${(a, b)}_n \in \JS$
+
+    On a donc ${(-n, b)}_a \in \JS$ par éclatement
 
     Par la conjecture précédente, ${(n, b)}_a \not \in \JS$
 \end{proof}
 
 \begin{corollary}
     Soit $n > a > b > c > 1$, alors
-    \[ {[(a, b, c)]}_n \not \in \JS \]
+    \[ {(a, b, c)}_n \not \in \JS \]
 \end{corollary}
+
+\begin{proof}
+    Supposons ${(a, b, c)}_n \in \JS$
+
+    On a donc ${(-n, b, c)}_a \in \JS$ et ${(a, -n, c)}_b \in \JS$ par éclatement
+
+    Et donc ${(b, c)}_a \in \JS$ et ${(a, c)}_b \in \JS$ par retrait de poids
+
+    Contradiction avec la conjecture précédente
+\end{proof}
 
 \begin{conjecture}
     Si $[a] \in \JS$, alors $[a] \in \J$, donc $\J = \JS$
