@@ -83,12 +83,12 @@ On notera aussi $S_n^m$ l'ensemble des m-uplets d'inversibles modulo n $({({\mat
 \begin{definition}
     La singularité $[a]$ est dite de \textbf{type $\J$} (noté $[a] \in \J$) ssi
     \begin{align*}
-        \exists a \in [a] : \forall [a^i] \in E_a : [a^i] \in \J
+        \exists a \in [a] : E_a \subset \J
     \end{align*}
     On parlera de \textbf{type $\J$ strict} (noté $[a] \in \JS$) lorsque 
     pour $a \in [a]$ l'éclatement naturel de $[a]$ on a
     \begin{align*}
-        \forall [a^i] \in E_a : [a^i] \in \JS
+        E_a \subset \JS
     \end{align*}
 \end{definition}
 
@@ -135,32 +135,29 @@ Résultats utiles, dûs à Habib Jaber.
 
 \begin{proposition}
     Soit $a, b \in \mathbb{Z}$
-    \[ a \perp b \implies {[(a, b)]}_{a + b} \in \JS \]
+    \[ a \perp b \implies {(a, b)}_{a + b} \in \JS \]
 \end{proposition}
 
 \begin{example}
-    $13 \perp 8 \implies {[(13, 8)]}_{21} \in \JS$
+    $8 \perp 5 \implies {(8, 5)}_{13} \in \JS$
 \end{example}
 \begin{figure}[h]
     \caption{Illustration avec la suite de Fibonacci}
     \centering
-    \includegraphics[width=\textwidth]{fibo}
+    \includegraphics[width=0.8\textwidth]{fibo}
 \end{figure}
 
 \begin{proposition}
     Soit $a, b \in \mathbb{Z}$
-    \[ 
-        {[(a, b)]}_n \in \JS \implies
-        \forall k \in \mathbb{Z}^*: {[(a, b)]}_{n+kab} \in \JS
-    \]
+    \[ {(a, b)}_n \in \JS \implies \forall k \in \mathbb{Z}^\times : {(a, b)}_{n+kab} \in \JS \]
 \end{proposition}
 
 \begin{example}
-    ${[(3, 2)]}_5 \in \JS \implies {[(3, 2)]}_{11} \in \JS$
+    ${[(3, 2)]}_5 \in \JS \implies {(3, 2)}_{11} \in \JS$
 \end{example}
 
 \begin{figure}[h]
-    \caption{${[(3, 2)]}_5 \cong {[(3, 2)]}_{11}$}
+    \caption{${(3, 2)}_5 \cong {(3, 2)}_{11}$}
     \centering
     \includegraphics[width=0.3\textwidth]{532}
     \includegraphics[width=0.3\textwidth]{11_3_2}
@@ -374,15 +371,20 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
 
 \newpage
 
-\begin{conjecture}
-    Soit $n > a > b > 1$, alors
-    \[ {[(a, b)]}_n \in \JS \implies {[(n-a, b)]}_n \not \in \JS \]
+\begin{conjecture} (Antisymmétrie) Soit $a > 1$, alors
+    \[ {(a, b)}_n \in \JS \implies {(-a, b)}_n \not \in \JS \]
 \end{conjecture}
 
 \begin{corollary}
-    Soit $n > a > b > 1$, alors
-    \[ {[(a, b)]}_n \in \JS \implies {[(n, b)]}_a \not \in \JS \]
+    Soit $a > 1$, alors
+    \[ {(a, b)}_n \in \JS \implies {(n, b)}_a \not \in \JS \]
 \end{corollary}
+
+\begin{proof}
+    Si ${(a, b)}_n \in \JS$, alors son éclatement ${(-n, b)}_a \in \JS$ (car $a > 1$)
+
+    Par la conjecture précédente, ${(n, b)}_a \not \in \JS$
+\end{proof}
 
 \begin{corollary}
     Soit $n > a > b > c > 1$, alors
