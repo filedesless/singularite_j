@@ -325,7 +325,7 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
 \end{proof}
 
 \begin{example}
-    ${(4, 3)}_5 \not \in \JS$ car $5 < 4 + 3$
+    ${(4, 3)}_5 \not \in \JS$ car $5 ( 4 + 3$
 \end{example}
 
 \begin{figure}[h]
@@ -336,12 +336,14 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
 
 \newpage
 
-\subsubsection{Combinaison linéaire}
+\section{Conjectures}
 
-\begin{proposition}
-    Soit $a, b, n \in \mathbb{N}_{>1}$, avec $a \perp b$, alors $\exists \alpha, \beta \in \mathbb{Z}_{ab}$ tels que
-    \[ \alpha a + \beta b \equiv n \pmod {ab} \]
-\end{proposition}
+\subsection{Combinaison linéaire}
+
+\begin{conjecture}
+    Soit ${(a, b)}_n \in \JS$, alors $\exists \alpha, \beta \in \mathbb{N}_{>0}$ tels que
+    \[ \alpha a + \beta b = n \]
+\end{conjecture}
 
 \begin{proof}
     Puisque $a \perp b$, prenons $s, t \in \mathbb{Z}$ tels que $1 = as + bt$ (par Bézout)
@@ -361,25 +363,32 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
     On a donc (toujours modulo $ab$)
     \begin{align*}
         x + y & \equiv nas + nbt \\
-              & \equiv n(as + bt) \\
-              & \equiv n
+                & \equiv n(as + bt) \\
+                & \equiv n
     \end{align*}
 
-    Et comme $x \vert a$ et $y \vert b$, prenons $\alpha = \frac{x}{a}$ et $\beta = \frac{y}{b}$, des entiers
+    Et comme $a \vert x$ et $b \vert y$, prenons $\alpha = \frac{x}{a}$ et $\beta = \frac{y}{b}$, des entiers
     \begin{align*}
         n & \equiv x + y \\
-          & \equiv \frac{x}{a}a + \frac{y}{b}b \\
-          & \equiv \alpha a + \beta b
+            & \equiv \frac{x}{a}a + \frac{y}{b}b \\
+            & \equiv \alpha a + \beta b
     \end{align*}
+
+    Il reste à montrer que cette égalité n'est pas seulement vraie dans $\mathbb{Z}_{ab}$ mais aussi dans $\mathbb{Z}$
 \end{proof}
 
-\subsubsection{Anti-symmétrie}
+Une piste de recherche explorée jusqu'ici sans succès passe par le probème des pièces de monnaie, on peut reformuler la conjecture 
+comme suit: ${(a, b)}_n \in \JS$ implique que $n$ est représentable par $a$ et $b$, même si $n < g(a, b)$ le nombre de Frobenius.
+Il est connu que la moitié de ces nombres $a + b < n < g(a, b)$ (ceux de la forme $n = ab - ka - qb$) sont non-représentables.
+Montrer que ces ${(a, b)}_n \not \in \JS$ suffirait à montrer la conjecture.
 
-\begin{proposition}
+\subsection{Anti-symmétrie}
+
+\begin{corollary}
     Soit $[s] \in S_n^2$ d'éclatement naturel $(a, b) \in [s]$, avec $a, b > 1$, alors
 
     \[ {(a, b)}_n \in \JS \implies {(-a, b)}_n \not \in \JS \]
-\end{proposition}
+\end{corollary}
 
 \begin{proof}
     Supposons ${(a, b)}_n \in \JS$
@@ -389,7 +398,7 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
         {(n - ia, b)}_{n-(i-1)a}
     \end{align*}
 
-    Puisque $a \perp b$, prenons $\alpha, \beta \in \mathbb{Z}_{ab}$ tels que $\alpha a + \beta b \equiv n \pmod {ab}$
+    Prenons $\alpha, \beta \in \mathbb{N}_{>0}$ tels que $\alpha a + \beta b = n$
 
     On a que, lorsque $i = \alpha$, $n - ia = n - \alpha a = \beta b$
 
@@ -398,13 +407,13 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
 
 \newpage
 
-\subsubsection{Échange racine-poids}
+\subsection{Échange racine-poids}
 
-\begin{proposition}
+\begin{corollary}
     Soit $[s] \in S_n^2$ d'éclatement naturel $(a, b) \in [s]$, avec $a, b > 1$, alors
     
     \[ {(a, b)}_n \in \JS \implies {(n, b)}_a \not \in \JS \]
-\end{proposition}
+\end{corollary}
 
 \begin{proof}
     Supposons ${(a, b)}_n \in \JS$
@@ -414,13 +423,13 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
     Par Anti-symmétrie, ${(n, b)}_a \not \in \JS$
 \end{proof}
 
-\subsubsection{Restriction au bord}
+\subsection{Restriction au bord}
 
-\begin{proposition}
+\begin{corollary}
     Soit $[s] \in S_n^3$ d'éclatement naturel $(a, b, c) \in [s]$, avec $a, b, c > 1$, alors
     
     \[ {(a, b, c)}_n \not \in \JS \]
-\end{proposition}
+\end{corollary}
 
 \begin{proof}
     Si ${(a, b, c)}_n \in \JS$, alors ses éclatements ${(-n, b, c)}_a \in \JS$ et ${(a, -n, c)}_b \in \JS$
@@ -448,10 +457,6 @@ Soit $m, n \in \mathbb{N}$ tels que $m, n \geq 2$ et une singularité $[a] = {([
     \centering
     \includegraphics[width=0.7\textwidth]{singularite_j_strict_m3_n13}
 \end{figure}
-
-\newpage
-
-\section{Conjectures}
 
 \begin{conjecture}
     Si $[a] \in \JS$, alors $[a] \in \J$, donc $\J = \JS$
