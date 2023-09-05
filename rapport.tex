@@ -129,7 +129,7 @@ La singularité racine de l'arbre ${(5, 3)}_{16}$ n'est donc pas de type $\JS$.
 
 \subsubsection{Algorithme d'Euclide et plus grand diviseur commun (PGDC)}
 
-Soient $a, b \in \mathbb{Z}$. On peut calculer le plus grand diviseur commun $\gcd(a, b)$ de $a$ et $b$ en procédant récursivement comme suit:
+Soient $a, b \in \mathbb{Z}$. On peut calculer le plus grand diviseur commun $\gcd(a, b)$ de $a$ et $b$ en procédant récursivement comme suit (supposant $\gcd(a, b) > 0$):
 \begin{align*}
     \gcd(a, b) & := \begin{cases}
         a & \text{ si $b = 0$,} \\
@@ -411,7 +411,7 @@ Il reste à montrer que cette égalité n'est pas seulement vraie dans $\mathbb{
 Une piste de recherche explorée jusqu'ici sans succès passe par le probème des pièces de monnaie. 
 On peut reformuler la conjecture comme suit: ${(a, b)}_n \in \JS$ implique que $n$ est représentable 
 par $a$ et $b$ (c'est-à-dire somme de multiples strictement positifs de $a$ et $b$) 
-($\exists \alpha, \beta \in \mathbb{N}_{>0}, \alpha a + \beta b = n$), même si $n < g(a, b) = ab - (a + b)$ le nombre de Frobenius\cite{sylvester1882}.
+($\exists \alpha, \beta \in \mathbb{N}_{>0}, \alpha a + \beta b = n$), même si $n < g(a, b) = ab - (a + b)$ le nombre de Frobenius\cite[page 134]{sylvester1882}.
 Il est connu que la moitié de ces nombres $a + b < n < g(a, b)$ (ceux de la forme $n = ab - ka - qb$) sont non-représentables.
 Montrer que ces ${(a, b)}_n \not \in \JS$ suffirait à montrer la conjecture.
 
